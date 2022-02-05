@@ -43,7 +43,7 @@ A propriedade `spring.jpa.hibernate.ddl-auto` é para inicialização do banco d
 - create: Cria o banco de dados todas as vezes, mas não o descarta ao fechar.
 - create-drop: Cria o banco de dados e o descarta quando SessionFactory fecha.
 
-crie a bando de dado manualmente utilizando a seguinte query SQL no gerenciador do bando de dados (neste caso DBeaver)
+crie o banco de dados manualmente utilizando a seguinte query SQL no gerenciador do bando de dados (neste caso DBeaver)
 
 ```SQL
 CREATE DATABASE testedb;
