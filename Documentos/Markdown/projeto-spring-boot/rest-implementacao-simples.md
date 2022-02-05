@@ -2,7 +2,7 @@
 
 Como interface de comunicacao a aplicacao utilizara a arquitetura REST, vamos realizar uma implementacao simples em um classe para entender alguns conceitos iniciais.
 
-vamos gerar um novo pacote chamado `resources`, de acordo com o padrao de projeto [Data Transfer Object (DTO)](https://martinfowler.com/eaaCatalog/dataTransferObject.html) proposto pos Martin Flowler o pacote `resources` cotem as classes controladoras REST. O padrao de nomenclatura das classes segue o nome da entidade no banco de dados seguito do sufixo `Resource`, de acordo com o diagrama UML do projeto vamos iniciar pela classe `Categoria` (pois e uma classe simple e imdependente) deste modo o nome da classe sera `CategoriaResource`
+vamos gerar um novo pacote chamado `resources`, de acordo com o padrao de projeto [Data Transfer Object (DTO)](https://martinfowler.com/eaaCatalog/dataTransferObject.html) proposto pos Martin Flowler o pacote `resources` cotem as classes controladoras REST. O padrao de nomenclatura das classes segue o nome da entidade no banco de dados seguito do sufixo `Resource`, de acordo com o [diagrama UML de classes](../../ConteudoDoCurso/Secao2-ImplementacaoDoModeloConceitual/Diagrama/diagrama-de-classes.png) do projeto vamos iniciar pela classe `Categoria` (pois e uma classe simple e imdependente) deste modo o nome da classe sera `CategoriaResource`
 
 ```java
 package br.com.estudos.springboot.projetospringboot.resource;
