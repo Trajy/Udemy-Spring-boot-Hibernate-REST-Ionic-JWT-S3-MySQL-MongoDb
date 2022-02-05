@@ -4,7 +4,6 @@
 
 O principal problema ao realizar a integracao entre o banco de dados que possui um paradigma relacional e a aplicacao java com paradigma orientado a objetos e o esforco necessario para realizar a conversao entre o paradigma relacional e orientado a objetos. O exemplo a seguir utiliza a biblioteca JDBC onde o metodo implementado ira buscar um filme no banco de dados ataves de seu codigo, note que e necessario realizar a consulta SQL retornar todos os dados da tabela para o objeto `resultado` da classe `ResultSet`, varrer o resultado com o intuito de armazenar as colunas retornadas nos correspondentes atributos do objeto `f` que e da classe `Filme` e retornar o objeto, este processo era custoso e segundo o autor `Martin Fowler` essa implementacao e cerca de 30% do esforco para a criacao de um sistema.
 
-
 <p align="center">
     <img src="img/jdbc-library-exemplo-de-implementacao.png"><br>
     figura 1 - JDBC library, exemplo de implementacao.
@@ -370,6 +369,7 @@ ao tentar remover o objeto do banco de dados uma exception ira informar que um i
     figura 1 - Exception ao tentar realizar operacoes com objeto destacado.
 </p>
 
+#
 ## Consideracoes Finais
 
 E importante conhecer o funcionamento das APIs que implementamos em nosso projeto, entretando no dia-a-dia de nossos projetos iremos realizar o SpringData que ira instanciar as classes e gerenciar a abertura e fechamento das transacoes automaticamente e incluir a camada de repository que ira fornecer metodos para realizar operacoes no bando de dados.
