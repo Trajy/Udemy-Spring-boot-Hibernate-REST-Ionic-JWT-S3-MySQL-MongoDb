@@ -9,7 +9,7 @@ O processo de implementacao de uma classe de dominio possui algumas etapas impor
 - metodos hashCode() and equals() (implementacao padrao somente id)
 - Heranca da interface Serializable como interface filho, extends (padrao 1L, nao e mais necessario)
 
-Como no documento [REST IMPLEMENTACAO SIMPLES](rest-implementacao-simples.md) a classe de controle `CategoriaResource` foi implementada, para este exemplo a classe de dominio `Categoria` sera implementa segundo o [diagrama UML de classes](../../ConteudoDoCurso/Secao2-ImplementacaoDoModeloConceitual/Diagrama/diagrama-de-classes.png) do projeto.
+Como no documento [REST IMPLEMENTACAO SIMPLES](03-rest-implementacao-simples.md) a classe de controle `CategoriaResource` foi implementada, para este exemplo a classe de dominio `Categoria` sera implementa segundo o [diagrama UML de classes](../../ConteudoDoCurso/Secao2-ImplementacaoDoModeloConceitual/Diagrama/diagrama-de-classes.png) do projeto.
 
 ```java
 package br.com.estudos.springboot.projetospringboot.domain;
@@ -61,7 +61,7 @@ public class Categoria {
 }
 ```
 
-Temos a classe de dominio implementada, para obter o retorno dos objetos instanciados a partir da classe de dominio `Categoria` vamos refator a classe `CategoriaResource`, com a instancia de 2 objetos de acordo com o [diagrama UML de objetos](../../ConteudoDoCurso/Secao2-ImplementacaoDoModeloConceitual/Diagrama/diagrama-de-objetos.png) e retornandos em uma lista conforme o codigo a seguir (internamente o Spring Boot realiza a conversao dos dados retornados para o formato JSON).
+Temos a classe de dominio implementada, para obter o retorno dos objetos instanciados a partir da classe de dominio `Categoria` vamos refator a classe `CategoriaResource`, com a instancia de 2 objetos de acordo com o [diagrama UML de objetos](../../ConteudoDoCurso/Secao2-ImplementacaoDoModeloConceitual/Diagrama/diagrama-de-objetos.png) e retornandos em uma lista conforme o codigo a seguir (internamente o Spring Boot realiza a conversao dos dados retornados para o formato JSON no endpoint).
 
 ```java
 package br.com.estudos.springboot.projetospringboot.resource;
@@ -99,7 +99,7 @@ ao acessar o caminho `http://localhost:8080/categorias/listar` utilizando o soft
 
 <p align="center">
     <img src="img/postman-retorno-dos-objetos-da-classe-categoria.png"><br>
-    figura 2 - json retornado a partir dos onjetos da classe Categoria instanciados.
+    figura 2 - json retornado a partir dos objetos da classe Categoria instanciados.
 </p>
 
 
