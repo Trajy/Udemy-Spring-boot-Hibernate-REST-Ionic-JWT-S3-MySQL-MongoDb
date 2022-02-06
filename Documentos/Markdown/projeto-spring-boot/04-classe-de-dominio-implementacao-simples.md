@@ -20,14 +20,14 @@ public class Categoria {
 
     private Integer id;
 
-    private String name;
+    private String nome;
 
     public Categoria(){
     }
 
-    public Categoria(Integer id, String name){
+    public Categoria(Integer id, String nome){
         setId(id);
-        setName(name);
+        setName(nome);
     }
 
     public Integer getId() {
@@ -38,12 +38,12 @@ public class Categoria {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String nome) {
+        this.name = nome;
     }
 
     @Override

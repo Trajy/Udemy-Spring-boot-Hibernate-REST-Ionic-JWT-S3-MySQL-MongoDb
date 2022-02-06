@@ -20,14 +20,14 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    private String nome;
 
     public Categoria(){
     }
 
-    public Categoria(Integer id, String name){
+    public Categoria(Integer id, String nome){
         setId(id);
-        setName(name);
+        setNome(nome);
     }
 
     public Integer getId() {
@@ -38,12 +38,12 @@ public class Categoria {
         this.id = id;
     }
 
-    public String getName() {
+    public String getNome() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.name = nome;
     }
 
     @Override
