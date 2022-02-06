@@ -1,6 +1,6 @@
 # __CRIACAO AUTOMATICA DA BASE DE DADOS__
 
-Retomando o exemplo apresentado em [CLASSE DE DOMINIO IMPLEMENTACAO SIMPLES](05-configuracao-mysql-com-springboot.md), para que o Spring Boot reconheca a Classe `Categoria` como uma classe de dominio (entidade, tabela no banco) e necessario refatorar a classe com as _annotations_.
+Retomando o exemplo apresentado em [CLASSE DE DOMINIO IMPLEMENTACAO SIMPLES](05-configuracao-mysql-com-springboot.md), para que o Hibernate reconheca a Classe `Categoria` como uma classe de dominio (entidade, tabela no banco) e necessario refatorar a classe com as _annotations_.
 
 LEMBRETE: para o Spring Boot gerar as entidades de domino automaticamente no banco de dados a propriedade `spring.jpa.hibernate.ddl-auto` deve possuir o valor `update` em ``resources/application.properties`.
 
