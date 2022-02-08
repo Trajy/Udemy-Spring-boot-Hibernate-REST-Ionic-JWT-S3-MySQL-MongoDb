@@ -176,7 +176,7 @@ public class Produto {
 }
 ```
 
-note que alem da _annotation_ `@ManyToMany` ha tambem `@JoinTable` que recebe como argumentos `name` que e o nome da tabela que ira relacinar os ids entre `Produto` e `Categoria`, `joinColumns` que recebe outra _annotation_ que contem como argumento o nome da coluna que ira conter chave estrangeira que referencia o id deste contexto (id de `Produto`) e por fim `inverseJoinColumns` que contem o nome da coluna que ira referenciar a chave estrangeira do outro contexto,( neste caso `Categoria`).
+note que alem da _annotation_ `@ManyToMany` ha tambem `@JoinTable` que recebe como argumentos `name` que e o nome da tabela que ira relacinar os ids entre `Produto` e `Categoria`, `joinColumns` que recebe outra _annotation_ que contem como argumento o nome da coluna que ira conter chave estrangeira que referencia o id deste contexto (id de `Produto`) e por fim `inverseJoinColumns` que contem o nome da coluna que ira referenciar a chave estrangeira do outro contexto,( id de `Categoria`).
 
 #
 ## Testando a implmentacao
