@@ -1,3 +1,12 @@
+# __OPERACAO DE INSTANCIACAO__
+
+implementacao da instanciacao dos objetos para que possamos inserir os dados atribuidos no banco de dados.
+
+O Spring possui a interface `CommandLineRunner` que possui a assinatura do metodo `run()` que e executado ao iniciar a aplicacao.
+
+Refatorando a classe `ProjetoSpringBootApplication` sobrescrevendo o metodo `run()`
+
+```java
 package br.com.estudos.springboot.projetospringboot;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,3 +42,8 @@ public class ProjetoSpringBootApplication implements CommandLineRunner {
 		categoriaRepository.saveAll(categorias);
 	}
 }
+```
+
+deste modo os dados serao inseridos no banco de dados sempre que a aplicacao for iniciada.
+
+LEMBRETE: no arquivo de `application.properties` temos a propriedade `spring.jpa.hibernate.ddl-auto=create`, ou seja o banco de dados e recriado toda vez que a aplicacao e iniciada.
