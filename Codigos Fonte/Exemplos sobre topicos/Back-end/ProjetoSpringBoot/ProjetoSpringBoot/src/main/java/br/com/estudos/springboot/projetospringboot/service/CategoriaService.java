@@ -2,6 +2,7 @@ package br.com.estudos.springboot.projetospringboot.service;
 
 import br.com.estudos.springboot.projetospringboot.domain.Categoria;
 import br.com.estudos.springboot.projetospringboot.ropository.CategoriaRepository;
+import br.com.estudos.springboot.projetospringboot.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,11 @@ public class CategoriaService {
 
     public Categoria buscar(Integer id){
         Optional<Categoria> categoria = repository.findById(id);
-        return categoria.orElse(null);
+
+        return categoria.orElseThrow(() -> new ObjectNotFoundException(
+                "objeto com id " + id + " nao encontrado na classe de dominio " + Categoria.class.getName()
+            )
+        );
     }
 
 }
