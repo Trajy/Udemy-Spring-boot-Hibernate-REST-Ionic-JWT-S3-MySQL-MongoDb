@@ -27,7 +27,7 @@ public class Categoria {
 
     public Categoria(Integer id, String nome){
         setId(id);
-        setName(nome);
+        setNome(nome);
     }
 
     public Integer getId() {
@@ -42,7 +42,7 @@ public class Categoria {
         return nome;
     }
 
-    public void setName(String nome) {
+    public void setNome(String nome) {
         this.name = nome;
     }
 
