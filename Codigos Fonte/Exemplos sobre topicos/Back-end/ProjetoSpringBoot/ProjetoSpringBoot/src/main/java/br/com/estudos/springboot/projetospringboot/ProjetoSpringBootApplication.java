@@ -1,8 +1,12 @@
 package br.com.estudos.springboot.projetospringboot;
 
 import br.com.estudos.springboot.projetospringboot.domain.Categoria;
+import br.com.estudos.springboot.projetospringboot.domain.Cidade;
+import br.com.estudos.springboot.projetospringboot.domain.Estado;
 import br.com.estudos.springboot.projetospringboot.domain.Produto;
 import br.com.estudos.springboot.projetospringboot.ropository.CategoriaRepository;
+import br.com.estudos.springboot.projetospringboot.ropository.CidadeRepository;
+import br.com.estudos.springboot.projetospringboot.ropository.EstadoRepository;
 import br.com.estudos.springboot.projetospringboot.ropository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +22,12 @@ public class ProjetoSpringBootApplication implements CommandLineRunner {
 
 	@Autowired
 	ProdutoRepository produtoRepository;
+
+	@Autowired
+	EstadoRepository estadoRepository;
+
+	@Autowired
+	CidadeRepository cidadeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoSpringBootApplication.class, args);
@@ -42,5 +52,18 @@ public class ProjetoSpringBootApplication implements CommandLineRunner {
 
 		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
 		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
+
+		var est1 = new Estado(null, "Minas Gerais");
+		var est2 = new Estado(null, "Sao Paulo");
+
+		var c1 = new Cidade(null, "Uberlandia", est1);
+		var c2 = new Cidade(null, "Sao Paulo", est2);
+		var c3 = new Cidade(null, "Campinas", est2);
+
+		est1.getCidades().addAll(Arrays.asList(c1));
+		est2.getCidades().addAll(Arrays.asList(c2, c3));
+
+		estadoRepository.saveAll(Arrays.asList(est1, est2));
+		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 	}
 }
