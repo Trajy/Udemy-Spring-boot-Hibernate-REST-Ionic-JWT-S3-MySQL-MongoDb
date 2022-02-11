@@ -184,5 +184,78 @@ public interface EstadoRepository extends JpaRepository<Estado, Integer> {
 
 implementadas as interfaces para acesso ao banco de dados, vamos refatorar o metodo `run()` na classe de inicializacao da aplicacao, `ProjetoSpringBootApplication`, para instanciar os objetos de acordo com o [diagrama UML de objetos](../../ConteudoDoCurso/Secao2-ImplementacaoDoModeloConceitual/Diagrama/diagrama-de-objetos.png) e persistir dados no banco.
 
+```java
+package br.com.estudos.springboot.projetospringboot;
+
+import br.com.estudos.springboot.projetospringboot.domain.Categoria;
+import br.com.estudos.springboot.projetospringboot.domain.Cidade;
+import br.com.estudos.springboot.projetospringboot.domain.Estado;
+import br.com.estudos.springboot.projetospringboot.domain.Produto;
+import br.com.estudos.springboot.projetospringboot.ropository.CategoriaRepository;
+import br.com.estudos.springboot.projetospringboot.ropository.CidadeRepository;
+import br.com.estudos.springboot.projetospringboot.ropository.EstadoRepository;
+import br.com.estudos.springboot.projetospringboot.ropository.ProdutoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.Arrays;
+
+@SpringBootApplication
+public class ProjetoSpringBootApplication implements CommandLineRunner {
+
+	@Autowired
+	CategoriaRepository categoriaRepository;
+
+	@Autowired
+	ProdutoRepository produtoRepository;
+
+	@Autowired
+	EstadoRepository estadoRepository;
+
+	@Autowired
+	CidadeRepository cidadeRepository;
+
+	public static void main(String[] args) {
+		SpringApplication.run(ProjetoSpringBootApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+
+		var cat1 = new Categoria(null, "Informatica");
+		var cat2 = new Categoria(null, "Escritorio");
+
+		var prod1 = new Produto(null, "Computador", 2000.00);
+		var prod2 = new Produto(null, "Impressora", 800.00);
+		var prod3 = new Produto(null, "Mouse", 80.00);
+
+		cat1.getProdutos().addAll(Arrays.asList(prod1, prod2, prod3));
+		cat2.getProdutos().addAll(Arrays.asList(prod3));
+
+		prod1.getCategorias().addAll(Arrays.asList(cat1));
+		prod2.getCategorias().addAll(Arrays.asList(cat1, cat2));
+		prod3.getCategorias().addAll(Arrays.asList(cat1));
+
+		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
+		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
+
+		var est1 = new Estado(null, "Minas Gerais");
+		var est2 = new Estado(null, "Sao Paulo");
+
+		var c1 = new Cidade(null, "Uberlandia", est1);
+		var c2 = new Cidade(null, "Sao Paulo", est2);
+		var c3 = new Cidade(null, "Campinas", est2);
+
+		est1.getCidades().addAll(Arrays.asList(c1));
+		est2.getCidades().addAll(Arrays.asList(c2, c3));
+
+		estadoRepository.saveAll(Arrays.asList(est1, est2));
+		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+	}
+}
+
+```
+
 
 
