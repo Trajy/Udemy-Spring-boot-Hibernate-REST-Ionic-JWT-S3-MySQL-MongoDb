@@ -1,6 +1,8 @@
 
 package br.com.estudos.springboot.projetospringboot.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -13,6 +15,7 @@ public class Cidade {
 
     private String nome;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "estado_id")
     private Estado estado;

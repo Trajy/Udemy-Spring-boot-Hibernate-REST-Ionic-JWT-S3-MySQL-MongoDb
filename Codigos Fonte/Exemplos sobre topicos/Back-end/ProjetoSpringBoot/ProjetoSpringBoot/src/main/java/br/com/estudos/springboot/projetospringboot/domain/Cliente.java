@@ -1,6 +1,7 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
 import br.com.estudos.springboot.projetospringboot.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.*;
@@ -20,6 +21,7 @@ public class Cliente {
 
     private Integer tipo;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
