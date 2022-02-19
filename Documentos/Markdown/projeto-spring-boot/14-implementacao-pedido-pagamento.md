@@ -275,11 +275,11 @@ public class Pedido {
 }
 ```
 
-na _annotation_ `@OneToOne`, e necessario informar como argumento o atributo `cacade = cascadeType.ALL`.
+na _annotation_ `@OneToOne`, e necessario informar como argumento o atributo `cascade = cascadeType.ALL`.
 
-as demais relacios foram implementadas de acordo com o diagrama de classes.
+os demais relacionamentos foram implementados de acordo com o diagrama de classes.
 
-refatoracao da classe cliente `Cliente`, para adicionar o relacionamento com `Peidido`
+refatoracao da classe cliente `Cliente`, para adicionar o relacionamento com `Pedido`
 
 ```java
 package br.com.estudos.springboot.projetospringboot.domain;
@@ -455,7 +455,7 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, Integer> {
 }
 ```
 
-refatoracao do metodo `run()` para instanciar os objetos a partir da novas classes de `domain` e persistir no banco de dados.
+refatoracao do metodo `run()` para instanciar os objetos a partir da novas classes da camada `domain` e persistir no banco de dados.
 
 ```java
 package br.com.estudos.springboot.projetospringboot;
