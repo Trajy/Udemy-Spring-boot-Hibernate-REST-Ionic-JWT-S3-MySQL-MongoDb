@@ -39,6 +39,9 @@ public class ProjetoSpringBootApplication implements CommandLineRunner {
 	@Autowired
 	PagamentoRepository pagamentoRepository;
 
+	@Autowired
+	ItemPedidoRepository itemPedidoRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoSpringBootApplication.class, args);
 	}
@@ -104,5 +107,18 @@ public class ProjetoSpringBootApplication implements CommandLineRunner {
 
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pgto1, pgto2));
+
+		ItemPedido ip1 = new ItemPedido(ped1, prod1, 200d, 1, 2000f);
+		ItemPedido ip2 = new ItemPedido(ped1, prod3, 0d, 2, 80f);
+		ItemPedido ip3 = new ItemPedido(ped2, prod2, 100d, 1, 800f);
+
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+
+		prod1.getItens().addAll(Arrays.asList(ip1));
+		prod2.getItens().addAll(Arrays.asList(ip3));
+		prod3.getItens().addAll(Arrays.asList(ip2));
+
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
 }

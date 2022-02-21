@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Pedido {
@@ -29,8 +28,10 @@ public class Pedido {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    Pedido(){
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedido> itens = new HashSet<>();
 
+    public Pedido() {
     }
 
     public Pedido(Integer id, Date instante, Endereco enderecoDeEntrega, Cliente cliente) {
@@ -46,6 +47,14 @@ public class Pedido {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<Produto> getProdutos(){
+        List<Produto> lista = new ArrayList<>();
+        for(ItemPedido itemPedido : itens){
+            lista.add(itemPedido.getItem());
+        }
+        return lista;
     }
 
     public Date getInstante() {
@@ -78,6 +87,14 @@ public class Pedido {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     @Override
