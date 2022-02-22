@@ -18,7 +18,7 @@ public class CategoriaService {
         Optional<Categoria> categoria = repository.findById(id);
 
         return categoria.orElseThrow(() -> new ObjectNotFoundException(
-                "objeto com id " + id + " nao encontrado na classe de dominio " + Categoria.class.getName()
+                "objeto com id " + id + " nao encontrado em " + this.getClass().getSimpleName()
             )
         );
     }

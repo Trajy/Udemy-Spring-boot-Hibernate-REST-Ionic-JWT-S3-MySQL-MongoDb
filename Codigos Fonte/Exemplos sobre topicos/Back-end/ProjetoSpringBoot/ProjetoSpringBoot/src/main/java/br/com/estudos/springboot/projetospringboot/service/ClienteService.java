@@ -18,7 +18,7 @@ public class ClienteService {
         Optional<Cliente> cliente = repository.findById(id);
 
         return cliente.orElseThrow(() -> new ObjectNotFoundException(
-                "objeto com id " + id + " nao encontrado na classe de dominio " + Cliente.class.getName()
+                "objeto com id " + id + " nao encontrado em " + this.getClass().getSimpleName()
             )
         );
     }
