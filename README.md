@@ -12,7 +12,7 @@ este repositorio contem [codigos fonte](https://github.com/Trajy/Udemy-Spring-bo
 ### Frameworks
 <img alt="Spring framework" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" height="20" wight="20"/> Spring
 
-### gerenciador de dependencias
+### Gerenciador de dependencias
 <img alt="Apache maven" src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_maven_icon_130397.png" height="20" wight="20"/> Maven
 
 ### Linguagem de Programacao
