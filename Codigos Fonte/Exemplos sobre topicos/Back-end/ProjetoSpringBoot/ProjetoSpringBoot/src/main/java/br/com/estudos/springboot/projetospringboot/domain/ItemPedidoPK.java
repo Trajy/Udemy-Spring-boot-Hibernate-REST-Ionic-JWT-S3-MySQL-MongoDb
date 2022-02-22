@@ -1,5 +1,7 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,6 +21,7 @@ public class ItemPedidoPK implements Serializable {
     @JoinColumn(name = "produto_id")
     private Produto produto;
 
+    @JsonIgnore
     public Pedido getPedido() {
         return pedido;
     }
@@ -27,6 +30,7 @@ public class ItemPedidoPK implements Serializable {
         this.pedido = pedido;
     }
 
+    @JsonIgnore
     public Produto getProduto() {
         return produto;
     }

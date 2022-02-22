@@ -1,6 +1,7 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -23,7 +24,7 @@ public class Pedido {
     @JoinColumn(name = "endereco_de_entrega_id")
     private Endereco enderecoDeEntrega;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -81,6 +82,7 @@ public class Pedido {
         this.enderecoDeEntrega = enderecoDeEntrega;
     }
 
+    @JsonIgnore
     public Cliente getCliente() {
         return cliente;
     }
