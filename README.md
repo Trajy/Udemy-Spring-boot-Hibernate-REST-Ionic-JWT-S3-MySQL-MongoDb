@@ -24,7 +24,7 @@ este repositorio contem [codigos fonte](https://github.com/Trajy/Udemy-Spring-bo
 Arquitetura de software consiste em um padrao generalizado que pode ser aplicado para diversos cenarios em um projeto de desenvolvimento. O modelo DTO (Data Transfer Object),genericamente tem como sua principal funcao obter e armazenar dados, e um padrao de projeto que organiza a transferencia de dados em camadas, onde cada uma possui sua responsabilidade especifica (vide [Atualizando Arquitetura de Software](Documentos/Markdown/projeto-spring-boot/07-atualizando-arquitetura-de-software.md)).
 
 <p align="center">
-    <img src="Documentos/Markdown/projeto-spring-boot/img/arquitetura-de-software-dto.png"><br>
+    <img src="Documentos/Markdown/projeto-spring-boot/01-implementacao-modelo-conceitual/img/arquitetura-de-software-dto.png"><br>
     figura 1 - arquitetura DTO (Data Transfer Object).
 </p>
 
