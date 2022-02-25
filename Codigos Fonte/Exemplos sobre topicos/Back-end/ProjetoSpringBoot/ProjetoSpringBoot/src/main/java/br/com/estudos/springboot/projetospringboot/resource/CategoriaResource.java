@@ -1,6 +1,7 @@
 package br.com.estudos.springboot.projetospringboot.resource;
 
 import br.com.estudos.springboot.projetospringboot.domain.Categoria;
+import br.com.estudos.springboot.projetospringboot.domain.dto.CategoriaDTO;
 import br.com.estudos.springboot.projetospringboot.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -44,4 +46,9 @@ public class CategoriaResource {
         return ResponseEntity.noContent().build();
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/buscar/todas")
+    public ResponseEntity<List<CategoriaDTO>> buscarTodas(){
+        List<CategoriaDTO> categorias = service.buscarTodas();
+        return ResponseEntity.ok().body(categorias);
+    }
 }
