@@ -31,4 +31,11 @@ public class CategoriaResource {
         return ResponseEntity.created(uri).build();
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/alterar/{id}")
+    public ResponseEntity<Void> alterar(@RequestBody Categoria categoria, @PathVariable Integer id){
+        categoria.setId(id);
+        categoria = service.alterar(categoria);
+        return ResponseEntity.noContent().build();
+    }
+
 }

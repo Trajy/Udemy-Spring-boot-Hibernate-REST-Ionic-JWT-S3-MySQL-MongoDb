@@ -26,4 +26,9 @@ public class CategoriaService {
     public Categoria inserir(Categoria categoria) {
         return repository.save(categoria);
     }
+
+    public Categoria alterar(Categoria categoria) {
+        buscar(categoria.getId());
+        return repository.save(categoria);
+    }
 }
