@@ -82,4 +82,4 @@ note que na _annotation_ `@RequestMapping` o atributo `method` recebe o valor `R
 
 O metodo `save()` salva o novo objeto no banco de dados e retorna a consulta do do mesmo (ao objeto retorna completo, incluindo o campo id que e gerado no banco de dados por conta do autoincrement).
 
-De acordo com o [MDN Web Docs](https://developer.mozilla.org/pt-BR/), ao retornar o codigo `201 Created` deve ser retornado o caminho para o novo recurso, o objeto da classe `URI` recebe o valor do caminho para o recurso e altera para o caminho de busca com o novo id gerado no banco de dados.
+De acordo com o [MDN Web Docs](https://developer.mozilla.org/pt-BR/), ao retornar o codigo [`201 Created`](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status/201) deve ser retornado o caminho para o novo recurso, o objeto da classe `URI` recebe o valor do caminho para o recurso e altera para o caminho de busca com o novo id gerado no banco de dados, o novo caminho sera disponibilizado no header da resposta por meio do metodo `created()`.
