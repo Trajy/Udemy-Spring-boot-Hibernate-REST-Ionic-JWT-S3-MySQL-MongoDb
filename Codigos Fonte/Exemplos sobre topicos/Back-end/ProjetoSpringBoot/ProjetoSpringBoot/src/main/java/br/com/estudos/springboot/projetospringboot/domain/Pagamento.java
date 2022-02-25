@@ -2,6 +2,7 @@ package br.com.estudos.springboot.projetospringboot.domain;
 
 import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagameno;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -15,7 +16,8 @@ public abstract class Pagamento {
 
     private Integer estadoPagamento;
 
-    @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId

@@ -2,6 +2,7 @@ package br.com.estudos.springboot.projetospringboot.domain;
 
 import br.com.estudos.springboot.projetospringboot.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public class Cliente {
 
     private Integer tipo;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
@@ -30,7 +31,8 @@ public class Cliente {
     @CollectionTable(name = "telefone")
     private Set<String> telefones = new HashSet<>();
 
-    @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
