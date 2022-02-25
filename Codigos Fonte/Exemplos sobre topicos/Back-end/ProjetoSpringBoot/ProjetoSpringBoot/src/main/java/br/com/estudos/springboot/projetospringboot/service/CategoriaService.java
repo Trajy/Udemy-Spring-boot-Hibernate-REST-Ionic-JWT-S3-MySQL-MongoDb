@@ -23,4 +23,7 @@ public class CategoriaService {
         );
     }
 
+    public Categoria inserir(Categoria categoria) {
+        return repository.save(categoria);
+    }
 }
