@@ -7,6 +7,10 @@ import br.com.estudos.springboot.projetospringboot.service.exceptions.DataIntegr
 import br.com.estudos.springboot.projetospringboot.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -55,5 +59,13 @@ public class CategoriaService {
                 new CategoriaDTO(categoria)).collect(Collectors.toList());
 
         return categoriaDTOs;
+    }
+
+    public Page<CategoriaDTO> buscarPaginado(Integer numeroPagina, Integer linhasPorPagina, String ordenarPor, String direcaoOrdencao){
+
+        PageRequest requisicaoPagina = PageRequest.of(numeroPagina, linhasPorPagina, Sort.Direction.valueOf(direcaoOrdencao), ordenarPor);
+        Page<Categoria> paginaCategorias = repository.findAll(requisicaoPagina);
+        Page<CategoriaDTO> paginaCategoriasDto = paginaCategorias.map(categoria -> new CategoriaDTO(categoria));
+        return paginaCategoriasDto;
     }
 }

@@ -4,6 +4,7 @@ import br.com.estudos.springboot.projetospringboot.domain.Categoria;
 import br.com.estudos.springboot.projetospringboot.domain.dto.CategoriaDTO;
 import br.com.estudos.springboot.projetospringboot.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -51,4 +52,16 @@ public class CategoriaResource {
         List<CategoriaDTO> categorias = service.buscarTodas();
         return ResponseEntity.ok().body(categorias);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/buscar")
+    public ResponseEntity<Page<CategoriaDTO>> buscarPaginado(
+            @RequestParam(value = "pg", defaultValue = "0") Integer numeroPagina,
+            @RequestParam(value = "qtditenspg", defaultValue = "2") Integer linhasPorPagina,
+            @RequestParam(value = "ordenar", defaultValue = "nome") String ordenarPor,
+            @RequestParam(value = "dir", defaultValue = "ASC") String direcaoOrdencao
+    ){
+        Page<CategoriaDTO> paginaCategoriaDto = service.buscarPaginado(numeroPagina, linhasPorPagina, ordenarPor, direcaoOrdencao);
+        return ResponseEntity.ok().body(paginaCategoriaDto);
+    }
+
 }
