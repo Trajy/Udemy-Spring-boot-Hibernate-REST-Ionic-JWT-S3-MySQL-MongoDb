@@ -16,7 +16,7 @@ public class Pedido {
 
     private Date instante;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
 
@@ -24,7 +24,7 @@ public class Pedido {
     @JoinColumn(name = "endereco_de_entrega_id")
     private Endereco enderecoDeEntrega;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

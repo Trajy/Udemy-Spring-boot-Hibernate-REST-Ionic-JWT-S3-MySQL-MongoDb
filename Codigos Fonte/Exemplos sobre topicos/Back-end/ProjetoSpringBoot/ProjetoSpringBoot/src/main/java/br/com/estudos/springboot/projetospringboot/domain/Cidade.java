@@ -15,7 +15,7 @@ public class Cidade {
 
     private String nome;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "estado_id")
     private Estado estado;

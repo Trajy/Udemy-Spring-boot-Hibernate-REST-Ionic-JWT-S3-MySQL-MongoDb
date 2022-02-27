@@ -17,7 +17,8 @@ public class Produto {
 
     private Double preco;
 
-    @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "produto_categoria",

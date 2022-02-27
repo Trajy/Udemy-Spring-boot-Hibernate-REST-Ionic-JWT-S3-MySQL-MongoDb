@@ -51,6 +51,13 @@ public class ProjetoSpringBootApplication implements CommandLineRunner {
 
 		var cat1 = new Categoria(null, "Informatica");
 		var cat2 = new Categoria(null, "Escritorio");
+		var cat3 = new Categoria(null, "Cama, Mesa e Banho");
+		var cat4 = new Categoria(null, "Jardinagem");
+		var cat5 = new Categoria(null, "Alimentos");
+		var cat6 = new Categoria(null, "Bebidas");
+		var cat7 = new Categoria(null, "Eletronicos");
+
+
 
 		var prod1 = new Produto(null, "Computador", 2000.00);
 		var prod2 = new Produto(null, "Impressora", 800.00);
@@ -63,7 +70,7 @@ public class ProjetoSpringBootApplication implements CommandLineRunner {
 		prod2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		prod3.getCategorias().addAll(Arrays.asList(cat1));
 
-		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
 		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
 
 		var est1 = new Estado(null, "Minas Gerais");
