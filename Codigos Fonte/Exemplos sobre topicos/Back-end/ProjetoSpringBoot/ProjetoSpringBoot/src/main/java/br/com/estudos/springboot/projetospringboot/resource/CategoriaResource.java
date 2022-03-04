@@ -1,16 +1,18 @@
 package br.com.estudos.springboot.projetospringboot.resource;
 
-import br.com.estudos.springboot.projetospringboot.domain.Categoria;
-import br.com.estudos.springboot.projetospringboot.domain.dto.CategoriaDTO;
-import br.com.estudos.springboot.projetospringboot.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
+
+import br.com.estudos.springboot.projetospringboot.domain.Categoria;
+import br.com.estudos.springboot.projetospringboot.domain.dto.CategoriaDTO;
+import br.com.estudos.springboot.projetospringboot.service.CategoriaService;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -28,14 +30,14 @@ public class CategoriaResource {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/nova")
-    public ResponseEntity<Void> inserir(@RequestBody Categoria categoria){
+    public ResponseEntity<Void> inserir(@Valid @RequestBody Categoria categoria){
         categoria = service.inserir(categoria);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().replacePath("categorias/buscar/{id}").build(categoria.getId());
         return ResponseEntity.created(uri).build();
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/alterar/{id}")
-    public ResponseEntity<Void> alterar(@RequestBody Categoria categoria, @PathVariable Integer id){
+    public ResponseEntity<Void> alterar(@Valid @RequestBody Categoria categoria, @PathVariable Integer id){
         categoria.setId(id);
         categoria = service.alterar(categoria);
         return ResponseEntity.noContent().build();

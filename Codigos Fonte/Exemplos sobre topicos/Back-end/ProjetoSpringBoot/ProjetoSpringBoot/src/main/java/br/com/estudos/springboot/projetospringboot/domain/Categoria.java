@@ -1,7 +1,8 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +14,8 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty(message = "preenchimento do campo obrigatorio")
+    @Length(min = 5, max = 80, message = "o campo deve conter entre {min} e {max} caracteres")
     private String nome;
 
     //@JsonManagedReference
