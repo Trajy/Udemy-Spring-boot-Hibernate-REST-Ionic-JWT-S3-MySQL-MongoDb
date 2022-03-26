@@ -1,6 +1,6 @@
 # __ATUALIZANDO CATEGORIA COM PUT__
 
-A alteracao de entidades pode ser feita utilizando o metodo `PUT` do `http`, vamos iniciar pela entidade `Categoria`, pois e uma entidade independente, ja foram realizada a persistencias dos dados no banco manualmente utilizando o metodo `run()`, basta expor o metodo `save()`, da JPA em um endpoint, no exemplo aterior o matodo `save()` foi utilizado para persistir um novo objeto no banco de dados, caso o id do objeto ja exista no bando da dados, os dados sao sobrescritos, para isto e necessario declarar novos metodos para inserir dados nas classes `CategoriaService` e `CategoriaResource`.
+A alteracao de entidades pode ser feita utilizando o metodo `PUT` do `http`, vamos iniciar pela entidade `Categoria`, pois e uma entidade independente, ja foram realizadas persistencias dos dados no banco manualmente utilizando o metodo `run()`, basta expor o metodo `save()`, da JPA em um endpoint, no exemplo anterior o metodo `save()` foi utilizado para persistir um novo objeto no banco de dados, caso o id do objeto ja exista no bando da dados, os dados sao sobrescritos, para isto e necessario declarar novos metodos para inserir dados nas classes `CategoriaService` e `CategoriaResource`.
 
 refatoracao da classe `CategoriaService`
 

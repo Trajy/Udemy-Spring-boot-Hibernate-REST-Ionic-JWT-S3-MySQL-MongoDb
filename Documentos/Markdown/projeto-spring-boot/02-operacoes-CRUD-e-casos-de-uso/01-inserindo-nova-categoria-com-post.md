@@ -1,6 +1,6 @@
 # __INSERINDO NOVA CATEGORIA COM POST__
 
-A insercao de novas entidades pode ser feita utilizando o metodo `POST` do `http`, vamos iniciar pela entidade `Categoria`, pois e uma entidade independente, ja foram realizada a persistencias dos dados no banco manualmente utilizando o metodo `run()`, basta expor o metodo `save` da JPA em um endpoint, para isto e necessario declarar novos metodos para inserir dados nas classes `CategoriaService` e `CategoriaResource`.
+A insercao de novas entidades pode ser feita utilizando o metodo `POST` do `http`, vamos iniciar pela entidade `Categoria`, pois e uma entidade independente, ja foram realizada a persistencias dos dados no banco manualmente utilizando o metodo `run()`, basta expor o metodo `save()` da JPA em um endpoint, para isto e necessario declarar novos metodos para inserir dados nas classes `CategoriaService` e `CategoriaResource`.
 
 refatoracao da classe `CategoriaService`
 
