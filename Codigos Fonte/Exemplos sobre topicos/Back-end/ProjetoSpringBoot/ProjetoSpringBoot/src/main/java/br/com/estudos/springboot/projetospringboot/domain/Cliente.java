@@ -1,10 +1,7 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
 import br.com.estudos.springboot.projetospringboot.domain.enums.TipoCliente;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -45,7 +42,7 @@ public class Cliente {
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
-        this.tipo = tipo.getId();
+        this.tipo = (tipo == null) ? null : tipo.getId();
     }
 
     public Integer getId() {

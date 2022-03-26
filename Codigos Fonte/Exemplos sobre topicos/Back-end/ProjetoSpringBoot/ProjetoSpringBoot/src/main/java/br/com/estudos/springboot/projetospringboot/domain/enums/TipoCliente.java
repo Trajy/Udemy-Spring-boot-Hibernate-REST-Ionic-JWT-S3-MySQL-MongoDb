@@ -5,9 +5,9 @@ public enum TipoCliente {
     PESSOA_FISICA(1, "pessoa fisica"),
     PESSOA_JURIDICA(2, "pessoa juridica");
 
-    private Integer id;
+    private final Integer id;
 
-    private String descricao;
+    private final String descricao;
 
     private TipoCliente(Integer id, String descricao){
         this.id = id;
@@ -24,9 +24,9 @@ public enum TipoCliente {
 
     public static TipoCliente toEnum(Integer id){
 
-        if(id.equals(null)) return null;
+        if(id == null) return null;
 
-        for(TipoCliente x : TipoCliente.values()) if (x.getId() == id) return x;
+        for(TipoCliente x : TipoCliente.values()) if (x.getId().equals(id)) return x;
 
         throw new IllegalArgumentException("id fornecido para tipo pessoa invalido");
     }
