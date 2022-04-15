@@ -1,7 +1,6 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
