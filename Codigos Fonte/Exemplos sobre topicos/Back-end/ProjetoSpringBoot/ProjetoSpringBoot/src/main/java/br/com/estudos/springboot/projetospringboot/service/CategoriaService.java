@@ -1,6 +1,7 @@
 package br.com.estudos.springboot.projetospringboot.service;
 
 import br.com.estudos.springboot.projetospringboot.domain.Categoria;
+import br.com.estudos.springboot.projetospringboot.domain.Categoria;
 import br.com.estudos.springboot.projetospringboot.domain.dto.CategoriaDTO;
 import br.com.estudos.springboot.projetospringboot.ropository.CategoriaRepository;
 import br.com.estudos.springboot.projetospringboot.service.exceptions.DataIntegrityException;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,8 +38,7 @@ public class CategoriaService {
     }
 
     public Categoria alterar(Categoria categoria) {
-        buscar(categoria.getId());
-        return repository.save(categoria);
+        return repository.save(alterarDadosRecebidos(categoria));
     }
 
     public void deletar(Integer id) {
@@ -65,5 +66,24 @@ public class CategoriaService {
         Page<Categoria> paginaCategorias = repository.findAll(requisicaoPagina);
         Page<CategoriaDTO> paginaCategoriasDto = paginaCategorias.map(categoria -> new CategoriaDTO(categoria));
         return paginaCategoriasDto;
+    }
+
+    private Categoria alterarDadosRecebidos(Categoria novoCategoria) {
+
+        Class<?> classe = novoCategoria.getClass();
+
+        Categoria categoriaAnterior = buscar(novoCategoria.getId());
+
+        for (Field x : classe.getDeclaredFields()) {
+            x.setAccessible(true);
+            try {
+                if (x.get(novoCategoria) == null) {
+                    x.set(novoCategoria, x.get(categoriaAnterior));
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return repository.save(novoCategoria);
     }
 }

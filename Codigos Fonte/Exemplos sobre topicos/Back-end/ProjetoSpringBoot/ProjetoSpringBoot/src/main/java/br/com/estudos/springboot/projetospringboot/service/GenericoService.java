@@ -48,7 +48,7 @@ public class GenericoService<E extends EntidadeComum> {
         try {
             repository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("Nao foi possivel excluir entidade");
+            throw new DataIntegrityException("Nao foi possivel excluir a entidade");
         }
     }
 

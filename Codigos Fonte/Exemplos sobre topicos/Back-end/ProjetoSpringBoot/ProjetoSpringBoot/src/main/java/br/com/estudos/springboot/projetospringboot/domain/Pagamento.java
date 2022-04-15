@@ -26,7 +26,7 @@ public abstract class Pagamento extends EntidadeComum {
 
     public Pagamento(Integer id, EstadoPagameno estadoPagamento, Pedido pedido) {
         this.id = id;
-        this.estadoPagamento = estadoPagamento.getId();
+        this.estadoPagamento = (estadoPagamento == null) ? null : estadoPagamento.getId();
         this.pedido = pedido;
     }
 

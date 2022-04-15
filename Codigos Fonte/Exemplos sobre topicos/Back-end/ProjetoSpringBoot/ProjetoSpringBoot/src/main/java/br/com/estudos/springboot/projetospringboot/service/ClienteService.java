@@ -37,9 +37,7 @@ public class ClienteService {
     }
 
     public Cliente alterar(Cliente cliente) {
-        buscar(cliente.getId());
-        return alterarDadosRecebidos(cliente);
-        // return repository.save(cliente);
+        return repository.save(alterarDadosRecebidos(cliente));
     }
 
     public void deletar(Integer id) {
@@ -77,13 +75,13 @@ public class ClienteService {
 
         Class<?> classe = novoCliente.getClass();
 
-        Cliente categoriaAnterior = buscar(novoCliente.getId());
+        Cliente clienteAnterior = buscar(novoCliente.getId());
 
         for (Field x : classe.getDeclaredFields()) {
             x.setAccessible(true);
             try {
                 if (x.get(novoCliente) == null) {
-                    x.set(novoCliente, x.get(categoriaAnterior));
+                    x.set(novoCliente, x.get(clienteAnterior));
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
