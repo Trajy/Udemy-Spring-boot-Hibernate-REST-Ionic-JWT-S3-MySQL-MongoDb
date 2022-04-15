@@ -1,17 +1,14 @@
 
 package br.com.estudos.springboot.projetospringboot.domain;
 
+import br.com.estudos.springboot.projetospringboot.domain.comum.EntidadeComum;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Cidade {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Cidade extends EntidadeComum {
 
     private String nome;
 
@@ -28,14 +25,6 @@ public class Cidade {
         this.id = id;
         this.nome = nome;
         this.estado = estado;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNome() {

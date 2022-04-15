@@ -1,6 +1,11 @@
 package br.com.estudos.springboot.projetospringboot.resource;
 
+import br.com.estudos.springboot.projetospringboot.domain.dto.ClienteDTO;
+import br.com.estudos.springboot.projetospringboot.service.ClienteService;
+import br.com.estudos.springboot.projetospringboot.service.GenericoService;
+import br.com.estudos.springboot.projetospringboot.service.configuracao.ConfiguracaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +14,6 @@ import java.net.URI;
 import java.util.List;
 
 import br.com.estudos.springboot.projetospringboot.domain.Cliente;
-import br.com.estudos.springboot.projetospringboot.domain.dto.ClienteDTO;
-import br.com.estudos.springboot.projetospringboot.service.ClienteService;
 
 import javax.validation.Valid;
 
@@ -18,8 +21,15 @@ import javax.validation.Valid;
 @RequestMapping(value = "/clientes")
 public class ClienteResource {
 
-    @Autowired
-    private ClienteService service;
+    // NO_USED
+    // @Autowired ClienteService service;
+
+    private GenericoService<Cliente> service;
+
+    public ClienteResource() {
+        this.service = new AnnotationConfigApplicationContext(ConfiguracaoService.class).
+            getBean(GenericoService.class, Cliente.class);
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/buscar/{id}")
     public ResponseEntity<?> buscar(@PathVariable Integer id){
@@ -32,6 +42,7 @@ public class ClienteResource {
     @RequestMapping(method = RequestMethod.POST, value = "/nova")
     public ResponseEntity<Void> inserir(@Valid @RequestBody Cliente cliente){
         cliente = service.inserir(cliente);
+
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().replacePath("clientes/buscar/{id}").build(cliente.getId());
         return ResponseEntity.created(uri).build();
     }
@@ -51,7 +62,7 @@ public class ClienteResource {
 
     @RequestMapping(method = RequestMethod.GET, value = "/buscar/todas")
     public ResponseEntity<List<ClienteDTO>> buscarTodas(){
-        List<ClienteDTO> clientes = service.buscarTodas();
+        List<ClienteDTO> clientes = service.buscarTodas(ClienteDTO.class);
         return ResponseEntity.ok().body(clientes);
     }
 
@@ -62,7 +73,7 @@ public class ClienteResource {
             @RequestParam(value = "ordenar", defaultValue = "nome") String ordenarPor,
             @RequestParam(value = "dir", defaultValue = "ASC") String direcaoOrdencao
     ){
-        Page<ClienteDTO> paginaClienteDto = service.buscarPaginado(numeroPagina, linhasPorPagina, ordenarPor, direcaoOrdencao);
+        Page<ClienteDTO> paginaClienteDto = service.buscarPaginado(numeroPagina, linhasPorPagina, ordenarPor, direcaoOrdencao, ClienteDTO.class);
         return ResponseEntity.ok().body(paginaClienteDto);
     }
 

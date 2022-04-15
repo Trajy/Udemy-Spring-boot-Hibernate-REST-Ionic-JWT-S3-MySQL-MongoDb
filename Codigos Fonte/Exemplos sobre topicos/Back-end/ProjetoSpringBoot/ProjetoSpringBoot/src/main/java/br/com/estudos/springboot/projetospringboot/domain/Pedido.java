@@ -1,5 +1,6 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
+import br.com.estudos.springboot.projetospringboot.domain.comum.EntidadeComum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -8,11 +9,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-public class Pedido {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Pedido extends EntidadeComum {
 
     private Date instante;
 
@@ -40,14 +37,6 @@ public class Pedido {
         this.instante = instante;
         this.enderecoDeEntrega = enderecoDeEntrega;
         this.cliente = cliente;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public List<Produto> getProdutos(){

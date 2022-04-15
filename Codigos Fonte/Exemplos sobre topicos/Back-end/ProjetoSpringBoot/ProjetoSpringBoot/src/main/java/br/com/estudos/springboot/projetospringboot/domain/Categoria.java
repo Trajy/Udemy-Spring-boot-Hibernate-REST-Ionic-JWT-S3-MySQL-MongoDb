@@ -1,6 +1,8 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
+import br.com.estudos.springboot.projetospringboot.domain.comum.EntidadeComum;
 import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
@@ -8,11 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Categoria {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Categoria extends EntidadeComum {
 
     @NotEmpty(message = "preenchimento do campo obrigatorio")
     @Length(min = 5, max = 80, message = "o campo deve conter entre {min} e {max} caracteres")
@@ -23,19 +21,12 @@ public class Categoria {
     private List<Produto> produtos = new ArrayList<>();
 
     public Categoria(){
+
     }
 
     public Categoria(Integer id, String nome){
-        setId(id);
-        setNome(nome);
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
         this.id = id;
+        setNome(nome);
     }
 
     public String getNome() {

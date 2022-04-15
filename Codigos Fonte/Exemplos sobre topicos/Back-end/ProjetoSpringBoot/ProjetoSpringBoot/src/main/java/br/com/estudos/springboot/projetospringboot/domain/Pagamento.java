@@ -1,5 +1,6 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
+import br.com.estudos.springboot.projetospringboot.domain.comum.EntidadeComum;
 import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagameno;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -9,10 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Pagamento {
-
-    @Id
-    private Integer id;
+public abstract class Pagamento extends EntidadeComum {
 
     private Integer estadoPagamento;
 
@@ -30,14 +28,6 @@ public abstract class Pagamento {
         this.id = id;
         this.estadoPagamento = estadoPagamento.getId();
         this.pedido = pedido;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public EstadoPagameno getEstadoPagamento() {
