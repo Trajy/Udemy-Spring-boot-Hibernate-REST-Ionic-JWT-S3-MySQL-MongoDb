@@ -14,7 +14,7 @@ public class Endereco extends EntidadeComum {
 
     private String numero;
 
-    private String complemente;
+    private String complemento;
 
     private String bairro;
 
@@ -38,11 +38,11 @@ public class Endereco extends EntidadeComum {
 
     }
 
-    public Endereco(Integer id, String logradouro, String numero, String complemente, String bairro, String cep, Cliente cliente, Cidade cidade) {
+    public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cliente cliente, Cidade cidade) {
         this.id = id;
         this.logradouro = logradouro;
         this.numero = numero;
-        this.complemente = complemente;
+        this.complemento = complemento;
         this.bairro = bairro;
         this.cep = cep;
         this.cliente = cliente;
@@ -66,11 +66,11 @@ public class Endereco extends EntidadeComum {
     }
 
     public String getComplemente() {
-        return complemente;
+        return complemento;
     }
 
-    public void setComplemente(String complemente) {
-        this.complemente = complemente;
+    public void setComplemente(String complemento) {
+        this.complemento = complemento;
     }
 
     public String getBairro() {
@@ -116,7 +116,7 @@ public class Endereco extends EntidadeComum {
                 "id=" + id +
                 ", logradouro='" + logradouro + '\'' +
                 ", numero='" + numero + '\'' +
-                ", complemente='" + complemente + '\'' +
+                ", complemente='" + complemento + '\'' +
                 ", bairro='" + bairro + '\'' +
                 ", cep='" + cep + '\'' +
                 ", cliente=" + cliente +
