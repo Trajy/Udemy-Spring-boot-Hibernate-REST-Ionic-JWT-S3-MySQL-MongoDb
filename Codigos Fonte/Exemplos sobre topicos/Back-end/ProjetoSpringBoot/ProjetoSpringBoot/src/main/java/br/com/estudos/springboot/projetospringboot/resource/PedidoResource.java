@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/pedidos")
 public class PedidoResource {
 
-    // NO_USED
-    // @Autowired private PedidoService service;
 
-    private GenericoService<Pedido> service;
+    @Autowired private PedidoService service;
+
+    // private GenericoService<Pedido> service;
 
     public PedidoResource() {
-        this.service = new AnnotationConfigApplicationContext(ConfiguracaoService.class).
-            getBean(GenericoService.class, Pedido.class);
+        /*this.service = new AnnotationConfigApplicationContext(ConfiguracaoService.class).
+            getBean(GenericoService.class, Pedido.class);*/
     }
 
     @GetMapping(value = "buscar/{id}")
