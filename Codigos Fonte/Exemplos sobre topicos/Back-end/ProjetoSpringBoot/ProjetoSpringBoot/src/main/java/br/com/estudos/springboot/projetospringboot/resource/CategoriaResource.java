@@ -21,14 +21,14 @@ import javax.validation.Valid;
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
-    // NO_USED
-    // @Autowired private CategoriaService service;
 
-    private GenericoService<Categoria> service;
+    @Autowired private CategoriaService service;
+
+    // private GenericoService<Categoria> service;
 
     public CategoriaResource() {
-        this.service = new AnnotationConfigApplicationContext(ConfiguracaoService.class).
-            getBean(GenericoService.class, Categoria.class);
+        /*this.service = new AnnotationConfigApplicationContext(ConfiguracaoService.class).
+            getBean(GenericoService.class, Categoria.class);*/
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/buscar/{id}")
@@ -61,7 +61,7 @@ public class CategoriaResource {
 
     @RequestMapping(method = RequestMethod.GET, value = "/buscar/todas")
     public ResponseEntity<List<CategoriaDTO>> buscarTodas(){
-        List<CategoriaDTO> categorias = service.buscarTodas(CategoriaDTO.class);
+        List<CategoriaDTO> categorias = service.buscarTodas(/*CategoriaDTO.class*/);
         return ResponseEntity.ok().body(categorias);
     }
 
@@ -72,7 +72,7 @@ public class CategoriaResource {
             @RequestParam(value = "ordenar", defaultValue = "nome") String ordenarPor,
             @RequestParam(value = "dir", defaultValue = "ASC") String direcaoOrdencao
     ){
-        Page<CategoriaDTO> paginaCategoriaDto = service.buscarPaginado(numeroPagina, linhasPorPagina, ordenarPor, direcaoOrdencao, CategoriaDTO.class);
+        Page<CategoriaDTO> paginaCategoriaDto = service.buscarPaginado(numeroPagina, linhasPorPagina, ordenarPor, direcaoOrdencao/*, CategoriaDTO.class*/);
         return ResponseEntity.ok().body(paginaCategoriaDto);
     }
 
