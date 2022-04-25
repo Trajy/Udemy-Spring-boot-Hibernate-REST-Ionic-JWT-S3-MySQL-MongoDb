@@ -1,8 +1,13 @@
 package br.com.estudos.springboot.projetospringboot.service;
 
+import br.com.estudos.springboot.projetospringboot.domain.Cidade;
 import br.com.estudos.springboot.projetospringboot.domain.Cliente;
+import br.com.estudos.springboot.projetospringboot.domain.Endereco;
 import br.com.estudos.springboot.projetospringboot.domain.dto.ClienteDTO;
+import br.com.estudos.springboot.projetospringboot.domain.dto.ClienteNovoDTO;
+import br.com.estudos.springboot.projetospringboot.domain.enums.TipoCliente;
 import br.com.estudos.springboot.projetospringboot.ropository.ClienteRepository;
+import br.com.estudos.springboot.projetospringboot.ropository.EnderecoRepository;
 import br.com.estudos.springboot.projetospringboot.service.exceptions.DataIntegrityException;
 import br.com.estudos.springboot.projetospringboot.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +17,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +29,9 @@ public class ClienteService {
     @Autowired
     private ClienteRepository repository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     public Cliente buscar(Integer id){
         Optional<Cliente> cliente = repository.findById(id);
 
@@ -32,7 +41,10 @@ public class ClienteService {
         );
     }
 
+    @Transactional
     public Cliente inserir(Cliente cliente) {
+        cliente.setId(null);
+        enderecoRepository.saveAll(cliente.getEnderecos());
         return repository.save(cliente);
     }
 
@@ -65,6 +77,48 @@ public class ClienteService {
         Page<Cliente> paginaClientes = repository.findAll(requisicaoPagina);
         Page<ClienteDTO> paginaClientesDto = paginaClientes.map(cliente -> new ClienteDTO(cliente));
         return paginaClientesDto;
+    }
+
+    public Cliente toEntidade(ClienteDTO clienteDTO) {
+
+        Cliente cliente = new Cliente();
+
+            for (Field x : clienteDTO.getClass().getDeclaredFields()) {
+                x.setAccessible(true);
+                try {
+                    x.set(cliente, x.get(clienteDTO));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        return cliente;
+    }
+
+    public Cliente toEntidade(ClienteNovoDTO clienteNovoDTO) {
+        Cliente cliente = new Cliente(null,
+            clienteNovoDTO.getNome(),
+            clienteNovoDTO.getEmail(),
+            clienteNovoDTO.getCpfOuCnpj(),
+            TipoCliente.toEnum(clienteNovoDTO.getTipo())
+        );
+
+        Cidade cidade = new Cidade(clienteNovoDTO.getCidadeId(), null, null);
+
+        Endereco endereco = new Endereco(null,
+            clienteNovoDTO.getLogradouro(),
+            clienteNovoDTO.getNumero(),
+            clienteNovoDTO.getComplemento(),
+            clienteNovoDTO.getBairro(),
+            clienteNovoDTO.getCep(),
+            cliente,
+            cidade
+        );
+
+        cliente.getEnderecos().add(endereco);
+        cliente.getTelefones().add(clienteNovoDTO.getTelefone());
+
+        return cliente;
     }
 
     public Cliente fromDto(ClienteDTO clienteDto){
