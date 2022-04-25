@@ -10,6 +10,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -25,6 +27,7 @@ public class GenericoService<E extends EntidadeComum> {
         this.repository = builder.repository;
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public E buscar(Integer id) {
         Optional<E> entidade = repository.findById(id);
 
@@ -34,6 +37,7 @@ public class GenericoService<E extends EntidadeComum> {
         );
     }
 
+    @Transactional
     public E inserir(E entidade) {
         return repository.save(entidade);
     }
