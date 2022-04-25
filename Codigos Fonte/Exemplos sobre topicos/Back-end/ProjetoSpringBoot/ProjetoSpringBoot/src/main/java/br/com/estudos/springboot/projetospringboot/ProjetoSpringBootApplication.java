@@ -8,12 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class ProjetoSpringBootApplication implements CommandLineRunner {
+
+	private static ApplicationContext appContext;
 
 	@Autowired
 	CategoriaRepository categoriaRepository;
@@ -43,7 +47,20 @@ public class ProjetoSpringBootApplication implements CommandLineRunner {
 	ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjetoSpringBootApplication.class, args);
+
+		appContext = SpringApplication.run(ProjetoSpringBootApplication.class, args);
+		displayAllBeanNames();
+	}
+
+	private static void displayAllBeanNames() {
+		System.out.println("\n\nAll Beans");
+		String[] allBeansArray = appContext.getBeanDefinitionNames();
+
+		Arrays.sort(appContext.getBeanDefinitionNames());
+		List<String> allBeans = List.of(allBeansArray);
+		for(String beanName : allBeans){
+			System.out.println(allBeans.indexOf(beanName) + " : " + beanName /*+ " : " + appContext.getBean(beanName).getClass().getSimpleName()*/);
+		}
 	}
 
 	@Override
