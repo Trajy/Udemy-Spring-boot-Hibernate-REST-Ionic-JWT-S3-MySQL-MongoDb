@@ -1,6 +1,5 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
-import br.com.estudos.springboot.projetospringboot.domain.comum.EntidadeComum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -8,7 +7,11 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Endereco extends EntidadeComum {
+public class Endereco {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String logradouro;
 
@@ -47,6 +50,14 @@ public class Endereco extends EntidadeComum {
         this.cep = cep;
         this.cliente = cliente;
         this.cidade = cidade;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getLogradouro() {
