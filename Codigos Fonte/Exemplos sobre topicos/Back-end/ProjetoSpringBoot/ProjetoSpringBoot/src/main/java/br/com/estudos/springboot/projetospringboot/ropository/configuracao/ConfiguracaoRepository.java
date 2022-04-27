@@ -9,7 +9,6 @@ import org.springframework.context.annotation.*;
 import javax.persistence.EntityManagerFactory;
 
 @Configuration
-@ComponentScan(value = "javax.persistence")
 public class ConfiguracaoRepository {
 
     @Autowired

@@ -1,34 +1,30 @@
 package br.com.estudos.springboot.projetospringboot.resource;
 
-import br.com.estudos.springboot.projetospringboot.service.CategoriaService;
+import br.com.estudos.springboot.projetospringboot.domain.Categoria;
+import br.com.estudos.springboot.projetospringboot.domain.dto.CategoriaDTO;
 import br.com.estudos.springboot.projetospringboot.service.GenericoService;
 import br.com.estudos.springboot.projetospringboot.service.configuracao.ConfiguracaoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-import br.com.estudos.springboot.projetospringboot.domain.Categoria;
-import br.com.estudos.springboot.projetospringboot.domain.dto.CategoriaDTO;
-
-import javax.validation.Valid;
-
 @RestController
 @RequestMapping(value = "/categorias")
+@Lazy
 public class CategoriaResource {
 
-
-    @Autowired private CategoriaService service;
-
-    // private GenericoService<Categoria> service;
+    private GenericoService<Categoria> service;
 
     public CategoriaResource() {
-        /*this.service = new AnnotationConfigApplicationContext(ConfiguracaoService.class).
-            getBean(GenericoService.class, Categoria.class);*/
+        this.service = new AnnotationConfigApplicationContext(ConfiguracaoService.class).
+            getBean(GenericoService.class, Categoria.class);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/buscar/{id}")
@@ -61,7 +57,7 @@ public class CategoriaResource {
 
     @RequestMapping(method = RequestMethod.GET, value = "/buscar/todas")
     public ResponseEntity<List<CategoriaDTO>> buscarTodas(){
-        List<CategoriaDTO> categorias = service.buscarTodas(/*CategoriaDTO.class*/);
+        List<CategoriaDTO> categorias = service.buscarTodas(CategoriaDTO.class);
         return ResponseEntity.ok().body(categorias);
     }
 
@@ -72,7 +68,7 @@ public class CategoriaResource {
             @RequestParam(value = "ordenar", defaultValue = "nome") String ordenarPor,
             @RequestParam(value = "dir", defaultValue = "ASC") String direcaoOrdencao
     ){
-        Page<CategoriaDTO> paginaCategoriaDto = service.buscarPaginado(numeroPagina, linhasPorPagina, ordenarPor, direcaoOrdencao/*, CategoriaDTO.class*/);
+        Page<CategoriaDTO> paginaCategoriaDto = service.buscarPaginado(numeroPagina, linhasPorPagina, ordenarPor, direcaoOrdencao, CategoriaDTO.class);
         return ResponseEntity.ok().body(paginaCategoriaDto);
     }
 

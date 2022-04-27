@@ -1,43 +1,30 @@
 package br.com.estudos.springboot.projetospringboot.resource;
 
+import br.com.estudos.springboot.projetospringboot.domain.Cliente;
 import br.com.estudos.springboot.projetospringboot.domain.dto.ClienteDTO;
 import br.com.estudos.springboot.projetospringboot.domain.dto.ClienteNovoDTO;
-import br.com.estudos.springboot.projetospringboot.ropository.EnderecoRepository;
-import br.com.estudos.springboot.projetospringboot.service.ClienteService;
 import br.com.estudos.springboot.projetospringboot.service.GenericoService;
 import br.com.estudos.springboot.projetospringboot.service.configuracao.ConfiguracaoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-import br.com.estudos.springboot.projetospringboot.domain.Cliente;
-
-import javax.transaction.Transactional;
-import javax.validation.Valid;
-
 @RestController
 @RequestMapping(value = "/clientes")
-@Lazy
 public class ClienteResource {
 
-     @Autowired ClienteService service;
-
-     @Autowired
-    EnderecoRepository enderecoRepository;
-
-    //private GenericoService<Cliente> service;
+    private GenericoService<Cliente> service;
 
     public ClienteResource() {
-        /*this.service = new AnnotationConfigApplicationContext(ConfiguracaoService.class).
-            getBean(GenericoService.class, Cliente.class);*/
+        this.service = new AnnotationConfigApplicationContext(ConfiguracaoService.class).
+            getBean(GenericoService.class, Cliente.class);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/buscar/{id}")
@@ -72,7 +59,7 @@ public class ClienteResource {
 
     @RequestMapping(method = RequestMethod.GET, value = "/buscar/todas")
     public ResponseEntity<List<ClienteDTO>> buscarTodas(){
-        List<ClienteDTO> clientes = service.buscarTodas(/*ClienteDTO.class*/);
+        List<ClienteDTO> clientes = service.buscarTodas(ClienteDTO.class);
         return ResponseEntity.ok().body(clientes);
     }
 
@@ -83,7 +70,7 @@ public class ClienteResource {
             @RequestParam(value = "ordenar", defaultValue = "nome") String ordenarPor,
             @RequestParam(value = "dir", defaultValue = "ASC") String direcaoOrdencao
     ){
-        Page<ClienteDTO> paginaClienteDto = service.buscarPaginado(numeroPagina, linhasPorPagina, ordenarPor, direcaoOrdencao/*, ClienteDTO.class*/);
+        Page<ClienteDTO> paginaClienteDto = service.buscarPaginado(numeroPagina, linhasPorPagina, ordenarPor, direcaoOrdencao, ClienteDTO.class);
         return ResponseEntity.ok().body(paginaClienteDto);
     }
 
