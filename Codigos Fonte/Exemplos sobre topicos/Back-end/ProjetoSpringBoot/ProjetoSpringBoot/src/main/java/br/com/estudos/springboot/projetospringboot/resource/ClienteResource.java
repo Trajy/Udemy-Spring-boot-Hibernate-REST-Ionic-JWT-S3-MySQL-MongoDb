@@ -46,7 +46,8 @@ public class ClienteResource {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/alterar/{id}")
-    public ResponseEntity<Void> alterar(@Valid @RequestBody Cliente cliente, @PathVariable Integer id){
+    public ResponseEntity<Void> alterar(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Integer id){
+        Cliente cliente = service.fromDto(clienteDTO);
         cliente.setId(id);
         cliente = service.alterar(cliente);
         return ResponseEntity.noContent().build();
