@@ -1,12 +1,12 @@
 package br.com.estudos.springboot.projetospringboot.domain.dto;
 
-import br.com.estudos.springboot.projetospringboot.service.validacao.ClienteNovoDTOAnnotationValidation;
+import br.com.estudos.springboot.projetospringboot.service.validacao.ClienteNovoDTOInsertValidation;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-@ClienteNovoDTOAnnotationValidation
+@ClienteNovoDTOInsertValidation
 public class ClienteNovoDTO {
 
     @NotEmpty(message = "preenchimento obrigatorio")

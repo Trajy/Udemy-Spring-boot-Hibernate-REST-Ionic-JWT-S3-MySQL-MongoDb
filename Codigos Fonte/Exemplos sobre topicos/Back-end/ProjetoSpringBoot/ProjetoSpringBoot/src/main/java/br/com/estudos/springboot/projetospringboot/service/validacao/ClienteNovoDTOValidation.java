@@ -12,13 +12,13 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteNovoDTOValidation implements ConstraintValidator<ClienteNovoDTOAnnotationValidation, ClienteNovoDTO> {
+public class ClienteNovoDTOValidation implements ConstraintValidator<ClienteNovoDTOInsertValidation, ClienteNovoDTO> {
 
     @Autowired
     private ClienteRepository clienteRepository;
 
     @Override
-    public void initialize(ClienteNovoDTOAnnotationValidation constraintAnnotation) {
+    public void initialize(ClienteNovoDTOInsertValidation constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 

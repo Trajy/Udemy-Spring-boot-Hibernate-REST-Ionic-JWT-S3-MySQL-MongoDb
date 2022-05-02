@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = ClienteNovoDTOValidation.class)
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ClienteNovoDTOAnnotationValidation {
+public @interface ClienteNovoDTOInsertValidation {
 
     String message() default "Erro de validacao";
 
