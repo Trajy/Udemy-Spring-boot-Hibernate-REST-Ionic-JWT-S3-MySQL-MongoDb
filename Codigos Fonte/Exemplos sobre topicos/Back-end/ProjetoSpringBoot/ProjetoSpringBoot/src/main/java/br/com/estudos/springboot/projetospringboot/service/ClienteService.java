@@ -141,6 +141,6 @@ public class ClienteService {
                 e.printStackTrace();
             }
         }
-        return repository.save(novoCliente);
+        return novoCliente;
     }
 }
