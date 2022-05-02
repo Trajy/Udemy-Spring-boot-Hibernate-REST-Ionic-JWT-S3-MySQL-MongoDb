@@ -18,7 +18,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/clientes")
-@Lazy
 public class ClienteResource {
 
      @Autowired ClienteService service;
