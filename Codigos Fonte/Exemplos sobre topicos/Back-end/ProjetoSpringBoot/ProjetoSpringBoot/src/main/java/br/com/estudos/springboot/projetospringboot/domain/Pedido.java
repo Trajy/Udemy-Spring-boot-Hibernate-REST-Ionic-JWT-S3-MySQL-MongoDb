@@ -42,6 +42,16 @@ public class Pedido {
         this.cliente = cliente;
     }
 
+    //os atributos do Json sao gerados com base nos metodos get declarados
+    public Double getValorTotal(){
+        Double total = 0.0;
+        for (ItemPedido item: this.itens){
+            total += item.getSubTotal();
+        }
+        return total;
+    }
+
+    @JsonIgnore
     public List<Produto> getProdutos(){
         List<Produto> lista = new ArrayList<>();
         for(ItemPedido itemPedido : itens){
