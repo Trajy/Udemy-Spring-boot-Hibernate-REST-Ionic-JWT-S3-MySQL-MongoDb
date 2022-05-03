@@ -42,26 +42,26 @@ public class DataBaseService {
     ItemPedidoRepository itemPedidoRepository;
 
     public void instantiateTestDataBase(){
-        var cat1 = new Categoria(null, "Informatica");
-        var cat2 = new Categoria(null, "Escritorio");
-        var cat3 = new Categoria(null, "Cama, Mesa e Banho");
-        var cat4 = new Categoria(null, "Jardinagem");
-        var cat5 = new Categoria(null, "Alimentos");
-        var cat6 = new Categoria(null, "Bebidas");
-        var cat7 = new Categoria(null, "Eletronicos");
+        Categoria cat1 = new Categoria(null, "Informatica");
+        Categoria cat2 = new Categoria(null, "Escritorio");
+        Categoria cat3 = new Categoria(null, "Cama, Mesa e Banho");
+        Categoria cat4 = new Categoria(null, "Jardinagem");
+        Categoria cat5 = new Categoria(null, "Alimentos");
+        Categoria cat6 = new Categoria(null, "Bebidas");
+        Categoria cat7 = new Categoria(null, "Eletronicos");
 
 
-        var prod1 = new Produto(null, "Computador", 2000.00);
-        var prod2 = new Produto(null, "Impressora", 800.00);
-        var prod3 = new Produto(null, "Mouse", 80.00);
-        var prod4 = new Produto(null, "Mesa de Escritorio", 300.00);
-        var prod5 = new Produto(null, "Toalha", 50.00);
-        var prod6 = new Produto(null, "Colcha", 200.00);
-        var prod7 = new Produto(null, "TV true color", 1200.00);
-        var prod8 = new Produto(null, "Rocadeira", 800.00);
-        var prod9 = new Produto(null, "Abajour", 100.00);
-        var prod10 = new Produto (null, "Pendente", 180.00);
-        var prod11 = new Produto(null, "Shampoo", 90.00);
+        Produto prod1 = new Produto(null, "Computador", 2000.00);
+        Produto prod2 = new Produto(null, "Impressora", 800.00);
+        Produto prod3 = new Produto(null, "Mouse", 80.00);
+        Produto prod4 = new Produto(null, "Mesa de Escritorio", 300.00);
+        Produto prod5 = new Produto(null, "Toalha", 50.00);
+        Produto prod6 = new Produto(null, "Colcha", 200.00);
+        Produto prod7 = new Produto(null, "TV true color", 1200.00);
+        Produto prod8 = new Produto(null, "Rocadeira", 800.00);
+        Produto prod9 = new Produto(null, "Abajour", 100.00);
+        Produto prod10 = new Produto (null, "Pendente", 180.00);
+        Produto prod11 = new Produto(null, "Shampoo", 90.00);
 
         cat1.getProdutos().addAll(Arrays.asList(prod1, prod2, prod3));
         cat2.getProdutos().addAll(Arrays.asList(prod3, prod4));
@@ -86,12 +86,12 @@ public class DataBaseService {
         categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
         produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9, prod10, prod11));
 
-        var est1 = new Estado(null, "Minas Gerais");
-        var est2 = new Estado(null, "Sao Paulo");
+        Estado est1 = new Estado(null, "Minas Gerais");
+        Estado est2 = new Estado(null, "Sao Paulo");
 
-        var c1 = new Cidade(null, "Uberlandia", est1);
-        var c2 = new Cidade(null, "Sao Paulo", est2);
-        var c3 = new Cidade(null, "Campinas", est2);
+        Cidade c1 = new Cidade(null, "Uberlandia", est1);
+        Cidade c2 = new Cidade(null, "Sao Paulo", est2);
+        Cidade c3 = new Cidade(null, "Campinas", est2);
 
         est1.getCidades().addAll(Arrays.asList(c1));
         est2.getCidades().addAll(Arrays.asList(c2, c3));
