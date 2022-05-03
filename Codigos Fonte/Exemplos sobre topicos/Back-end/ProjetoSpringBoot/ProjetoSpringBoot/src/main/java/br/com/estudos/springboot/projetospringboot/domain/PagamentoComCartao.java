@@ -1,10 +1,12 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
-import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagameno;
+import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.persistence.Entity;
 
 @Entity
+@JsonTypeName(value = "pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento {
 
     private Integer numeroDeParcelas;
@@ -12,7 +14,7 @@ public class PagamentoComCartao extends Pagamento {
     PagamentoComCartao(){
     }
 
-    public PagamentoComCartao(Integer id, EstadoPagameno estadoPagamento, Pedido pedido, Integer numeroDeParcelas) {
+    public PagamentoComCartao(Integer id, EstadoPagamento estadoPagamento, Pedido pedido, Integer numeroDeParcelas) {
         super(id, estadoPagamento, pedido);
         this.numeroDeParcelas = numeroDeParcelas;
     }

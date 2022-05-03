@@ -1,7 +1,7 @@
 package br.com.estudos.springboot.projetospringboot;
 
 import br.com.estudos.springboot.projetospringboot.domain.*;
-import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagameno;
+import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagamento;
 import br.com.estudos.springboot.projetospringboot.domain.enums.TipoCliente;
 import br.com.estudos.springboot.projetospringboot.ropository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.context.ApplicationContext;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
 public class ProjetoSpringBootApplication implements CommandLineRunner {
@@ -129,9 +128,9 @@ public class ProjetoSpringBootApplication implements CommandLineRunner {
 		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), e1, cli1);
 		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), e2, cli1);
 
-		Pagamento pgto1 = new PagamentoComCartao(null, EstadoPagameno.QUITADO, ped1, 6);
+		Pagamento pgto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		ped1.setPagamento(pgto1);
-		Pagamento pgto2 = new PagamentoComBoleto(null, EstadoPagameno.PEDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
+		Pagamento pgto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
 		ped2.setPagamento(pgto2);
 
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
@@ -139,9 +138,9 @@ public class ProjetoSpringBootApplication implements CommandLineRunner {
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pgto1, pgto2));
 
-		ItemPedido ip1 = new ItemPedido(ped1, prod1, 200d, 1, 2000f);
-		ItemPedido ip2 = new ItemPedido(ped1, prod3, 0d, 2, 80f);
-		ItemPedido ip3 = new ItemPedido(ped2, prod2, 100d, 1, 800f);
+		ItemPedido ip1 = new ItemPedido(ped1, prod1, 200d, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, prod3, 0d, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, prod2, 100d, 1, 800.00);
 
 		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
 		ped2.getItens().addAll(Arrays.asList(ip3));

@@ -1,15 +1,15 @@
 package br.com.estudos.springboot.projetospringboot.domain.enums;
 
-public enum EstadoPagameno {
+public enum EstadoPagamento {
 
-    PEDENTE(1, "pedente"),
+    PENDENTE(1, "pedente"),
     QUITADO(2, "quitado"),
     CANCELADO(3, "cancelado");
 
     private Integer id;
     private String descricao;
 
-    EstadoPagameno(int id, String descricao) {
+    EstadoPagamento(int id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }
@@ -22,9 +22,9 @@ public enum EstadoPagameno {
         return descricao;
     }
 
-    public static EstadoPagameno toEnum(Integer id){
+    public static EstadoPagamento toEnum(Integer id){
 
-        for (EstadoPagameno x : EstadoPagameno.values()) if (x.getId() == id) return x;
+        for (EstadoPagamento x : EstadoPagamento.values()) if (x.getId() == id) return x;
 
         throw new IllegalArgumentException("id fornecido para EstadoPagamento invalido");
     }

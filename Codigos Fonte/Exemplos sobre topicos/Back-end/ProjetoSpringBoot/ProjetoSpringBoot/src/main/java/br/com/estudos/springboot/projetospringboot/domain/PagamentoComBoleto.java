@@ -1,11 +1,13 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
-import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagameno;
+import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
+@JsonTypeName(value = "pagamentoComBoleto")
 public class PagamentoComBoleto extends Pagamento {
 
     private Date dataVencimento;
@@ -14,7 +16,7 @@ public class PagamentoComBoleto extends Pagamento {
     public PagamentoComBoleto(){
     }
 
-    public PagamentoComBoleto(Integer id, EstadoPagameno estadoPagamento, Pedido pedido, Date dataVencimento, Date dataPagamento) {
+    public PagamentoComBoleto(Integer id, EstadoPagamento estadoPagamento, Pedido pedido, Date dataVencimento, Date dataPagamento) {
         super(id, estadoPagamento, pedido);
         this.dataVencimento = dataVencimento;
         this.dataPagamento = dataPagamento;

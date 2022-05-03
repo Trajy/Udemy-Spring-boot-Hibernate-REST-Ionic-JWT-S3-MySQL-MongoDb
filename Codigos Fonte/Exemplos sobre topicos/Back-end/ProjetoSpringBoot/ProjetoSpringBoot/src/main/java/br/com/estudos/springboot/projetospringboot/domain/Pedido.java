@@ -1,8 +1,6 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.*;
@@ -55,7 +53,7 @@ public class Pedido {
     public List<Produto> getProdutos(){
         List<Produto> lista = new ArrayList<>();
         for(ItemPedido itemPedido : itens){
-            lista.add(itemPedido.getItem());
+            lista.add(itemPedido.getProduto());
         }
         return lista;
     }

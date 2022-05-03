@@ -14,12 +14,12 @@ public class ItemPedido {
 
     private Integer quantidade;
 
-    private Float preco;
+    private Double preco;
 
     public ItemPedido() {
     }
 
-    public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Float preco) {
+    public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
         this.id.setPedido(pedido);
         this.id.setProduto(produto);
         this.desconto = desconto;
@@ -36,8 +36,16 @@ public class ItemPedido {
         return id.getPedido();
     }
 
-    public Produto getItem(){
+    public void setPedido(Pedido pedido){
+        this.id.setPedido(pedido);
+    }
+
+    public Produto getProduto(){
         return id.getProduto();
+    }
+
+    public void setProduto(Produto produto){
+        this.id.setProduto(produto);
     }
 
     public Double getDesconto() {
@@ -56,11 +64,11 @@ public class ItemPedido {
         this.quantidade = quantidade;
     }
 
-    public Float getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(Float preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 }

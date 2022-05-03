@@ -1,14 +1,15 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
-import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagameno;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagamento;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Pagamento {
 
     @Id
@@ -27,7 +28,7 @@ public abstract class Pagamento {
     public Pagamento(){
     }
 
-    public Pagamento(Integer id, EstadoPagameno estadoPagamento, Pedido pedido) {
+    public Pagamento(Integer id, EstadoPagamento estadoPagamento, Pedido pedido) {
         this.id = id;
         this.estadoPagamento = (estadoPagamento == null) ? null : estadoPagamento.getId();
         this.pedido = pedido;
@@ -41,11 +42,11 @@ public abstract class Pagamento {
         this.id = id;
     }
 
-    public EstadoPagameno getEstadoPagamento() {
-        return EstadoPagameno.toEnum(id);
+    public EstadoPagamento getEstadoPagamento() {
+        return EstadoPagamento.toEnum(id);
     }
 
-    public void setEstadoPagamento(EstadoPagameno estadoPagamento) {
+    public void setEstadoPagamento(EstadoPagamento estadoPagamento) {
         this.estadoPagamento = estadoPagamento.getId();
     }
 
