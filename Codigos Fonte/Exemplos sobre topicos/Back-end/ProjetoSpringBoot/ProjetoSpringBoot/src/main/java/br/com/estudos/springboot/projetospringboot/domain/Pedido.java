@@ -1,6 +1,7 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.*;
@@ -14,7 +15,7 @@ public class Pedido {
 
     private Date instante;
 
-    //@JsonManagedReference
+    @JsonManagedReference(value = "pedido_pagamento")
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
 
@@ -22,7 +23,7 @@ public class Pedido {
     @JoinColumn(name = "endereco_de_entrega_id")
     private Endereco enderecoDeEntrega;
 
-    //@JsonManagedReference
+    @JsonManagedReference(value = "pedido_cliente")
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

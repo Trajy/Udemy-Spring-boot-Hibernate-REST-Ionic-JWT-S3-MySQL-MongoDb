@@ -1,5 +1,6 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -16,8 +17,7 @@ public class Produto {
 
     private Double preco;
 
-    //@JsonBackReference
-    @JsonIgnore
+    @JsonBackReference(value = "produto_categoria")
     @ManyToMany
     @JoinTable(
             name = "produto_categoria",

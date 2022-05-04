@@ -1,5 +1,6 @@
 package br.com.estudos.springboot.projetospringboot.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -19,7 +20,7 @@ public class Categoria {
     @Length(min = 5, max = 80, message = "o campo deve conter entre {min} e {max} caracteres")
     private String nome;
 
-    //@JsonManagedReference
+    @JsonManagedReference(value = "produto_categoria")
     @ManyToMany(mappedBy = "categorias")
     private List<Produto> produtos = new ArrayList<>();
 
