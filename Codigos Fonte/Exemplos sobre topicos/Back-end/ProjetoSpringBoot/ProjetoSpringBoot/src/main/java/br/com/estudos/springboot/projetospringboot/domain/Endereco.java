@@ -130,7 +130,6 @@ public class Endereco {
                 ", complemente='" + complemento + '\'' +
                 ", bairro='" + bairro + '\'' +
                 ", cep='" + cep + '\'' +
-                ", cliente=" + cliente +
                 ", cidade=" + cidade +
                 '}';
     }
