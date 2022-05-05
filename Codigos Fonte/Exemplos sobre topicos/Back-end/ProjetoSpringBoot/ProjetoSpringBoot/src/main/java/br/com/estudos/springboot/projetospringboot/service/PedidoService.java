@@ -52,6 +52,7 @@ public class PedidoService {
     public Pedido inserir(Pedido obj) {
         obj.setId(null);
         obj.setInstante(new Date());
+        obj.setCliente(clienteService.buscar(obj.getCliente().getId()));
         obj.getPagamento().setEstadoPagamento(EstadoPagamento.PENDENTE);
         obj.getPagamento().setPedido(obj);
         if (obj.getPagamento() instanceof PagamentoComBoleto) {
@@ -66,6 +67,7 @@ public class PedidoService {
             ip.setPedido(obj);
         }
         itemPedidoRepository.saveAll(obj.getItens());
+        System.out.println(obj);
         return obj;
     }
 }

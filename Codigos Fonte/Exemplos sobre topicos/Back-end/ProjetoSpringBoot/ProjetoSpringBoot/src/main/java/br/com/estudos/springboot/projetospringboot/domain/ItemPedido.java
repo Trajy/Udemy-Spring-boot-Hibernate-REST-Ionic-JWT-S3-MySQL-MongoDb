@@ -2,6 +2,8 @@ package br.com.estudos.springboot.projetospringboot.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 @Entity
 public class ItemPedido {
@@ -70,5 +72,16 @@ public class ItemPedido {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    @Override
+    public String toString() {
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        return new StringBuilder().
+            append(getProduto().getNome()).
+            append(", Qtd: ").append(getQuantidade()).
+            append(", Preco Unitario: ").append(numberFormat.format(getPreco())).
+            append(", Subtotal: ").append(numberFormat.format(getSubTotal())).
+            append("\n").toString();
     }
 }

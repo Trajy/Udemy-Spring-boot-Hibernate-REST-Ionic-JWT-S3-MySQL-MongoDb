@@ -3,6 +3,8 @@ package br.com.estudos.springboot.projetospringboot.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
@@ -90,7 +92,6 @@ public class Pedido {
         this.enderecoDeEntrega = enderecoDeEntrega;
     }
 
-    @JsonIgnore
     public Cliente getCliente() {
         return cliente;
     }
@@ -122,12 +123,20 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" +
-                "id=" + id +
-                ", instante=" + instante +
-                ", pagamento=" + pagamento +
-                ", enderecoDeEntrega=" + enderecoDeEntrega +
-                ", cliente=" + cliente +
-                '}';
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        StringBuilder stringBuilder = new StringBuilder().
+            append("Pedido Numero: ").append(getId()).
+            append(", Instante: ").append(simpleDateFormat.format(getInstante())).
+            append(", Cliente: ").append(getCliente()).
+            append(" Situacao do Pagamento: ").append(getPagamento().getEstadoPagamento().getDescricao()).
+            append("\nDETALHES\n");
+        for(ItemPedido itemPedido : itens){
+            stringBuilder.append(itemPedido.toString());
+        }
+
+        stringBuilder.append("\nValor Total: ").append(numberFormat.format(getValorTotal()));
+
+        return stringBuilder.toString();
     }
 }
