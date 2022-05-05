@@ -43,7 +43,7 @@ public abstract class Pagamento {
     }
 
     public EstadoPagamento getEstadoPagamento() {
-        return EstadoPagamento.toEnum(id);
+        return EstadoPagamento.toEnum(estadoPagamento);
     }
 
     public void setEstadoPagamento(EstadoPagamento estadoPagamento) {
