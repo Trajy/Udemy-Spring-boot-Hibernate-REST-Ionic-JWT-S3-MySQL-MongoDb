@@ -7,6 +7,7 @@ import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagamento;
 import br.com.estudos.springboot.projetospringboot.ropository.ItemPedidoRepository;
 import br.com.estudos.springboot.projetospringboot.ropository.PagamentoRepository;
 import br.com.estudos.springboot.projetospringboot.ropository.PedidoRepository;
+import br.com.estudos.springboot.projetospringboot.service.email.EmailService;
 import br.com.estudos.springboot.projetospringboot.service.exceptions.ObjectNotFoundException;
 import br.com.estudos.springboot.projetospringboot.service.utils.BoletoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class PedidoService {
     @Autowired
     private ClienteService clienteService;
 
+    @Autowired
+    private EmailService emailService;
+
     @GetMapping(value = "/pedidos/{id}")
     public Pedido buscar(@PathVariable Integer id){
 
@@ -67,7 +71,7 @@ public class PedidoService {
             ip.setPedido(obj);
         }
         itemPedidoRepository.saveAll(obj.getItens());
-        System.out.println(obj);
+        emailService.sendOrderConfirmationEmail(obj);
         return obj;
     }
 }

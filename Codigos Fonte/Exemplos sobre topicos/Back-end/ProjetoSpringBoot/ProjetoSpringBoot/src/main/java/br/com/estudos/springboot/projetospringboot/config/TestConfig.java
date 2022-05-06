@@ -1,6 +1,8 @@
 package br.com.estudos.springboot.projetospringboot.config;
 
 import br.com.estudos.springboot.projetospringboot.service.DataBaseService;
+import br.com.estudos.springboot.projetospringboot.service.email.EmailService;
+import br.com.estudos.springboot.projetospringboot.service.email.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +25,11 @@ public class TestConfig {
         // apenas para retornar algo, os beans nao podem retornar o primitivo void
         Optional<?> voyd = Optional.ofNullable(Void.TYPE);
         return voyd;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new MockEmailService();
     }
 }
 

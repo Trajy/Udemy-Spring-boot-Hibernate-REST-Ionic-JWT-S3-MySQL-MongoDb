@@ -1,3 +1,7 @@
 spring:
   profiles:
     active: test
+
+default:
+  sender: professor.henrique.trajano@gmail.com
+  recipient: professor.henrique.trajano@gmail.com
