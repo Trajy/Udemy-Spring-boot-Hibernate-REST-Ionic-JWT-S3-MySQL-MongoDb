@@ -1,6 +1,8 @@
 package br.com.estudos.springboot.projetospringboot.config;
 
 import br.com.estudos.springboot.projetospringboot.service.DataBaseService;
+import br.com.estudos.springboot.projetospringboot.service.email.EmailService;
+import br.com.estudos.springboot.projetospringboot.service.email.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +30,11 @@ public class DevConfig {
 
         // apenas para retornar algo, os beans nao podem retornar o primitivo void
         return true;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new SmtpEmailService();
     }
 }
 
