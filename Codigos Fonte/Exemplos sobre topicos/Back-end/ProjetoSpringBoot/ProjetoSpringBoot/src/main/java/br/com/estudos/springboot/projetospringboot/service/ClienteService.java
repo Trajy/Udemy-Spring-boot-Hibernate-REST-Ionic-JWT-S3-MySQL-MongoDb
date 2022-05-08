@@ -15,6 +15,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -31,6 +32,9 @@ public class ClienteService {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     public Cliente buscar(Integer id){
         Optional<Cliente> cliente = repository.findById(id);
@@ -79,28 +83,13 @@ public class ClienteService {
         return paginaClientesDto;
     }
 
-    public Cliente toEntidade(ClienteDTO clienteDTO) {
-
-        Cliente cliente = new Cliente();
-
-            for (Field x : clienteDTO.getClass().getDeclaredFields()) {
-                x.setAccessible(true);
-                try {
-                    x.set(cliente, x.get(clienteDTO));
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        return cliente;
-    }
-
     public Cliente toEntidade(ClienteNovoDTO clienteNovoDTO) {
         Cliente cliente = new Cliente(null,
             clienteNovoDTO.getNome(),
             clienteNovoDTO.getEmail(),
             clienteNovoDTO.getCpfOuCnpj(),
-            TipoCliente.toEnum(clienteNovoDTO.getTipo())
+            TipoCliente.toEnum(clienteNovoDTO.getTipo()),
+            encoder.encode(clienteNovoDTO.getSenha())
         );
 
         Cidade cidade = new Cidade(clienteNovoDTO.getCidadeId(), null, null);
@@ -121,8 +110,8 @@ public class ClienteService {
         return cliente;
     }
 
-    public Cliente fromDto(ClienteDTO clienteDto){
-        return new Cliente(clienteDto.getId(), clienteDto.getNome(), clienteDto.getEmail(), null, null);
+    public Cliente toEntidade(ClienteDTO clienteDto){
+        return new Cliente(clienteDto.getId(), clienteDto.getNome(), clienteDto.getEmail(), null, null, null);
     }
 
     private Cliente alterarDadosRecebidos(Cliente novoCliente) {

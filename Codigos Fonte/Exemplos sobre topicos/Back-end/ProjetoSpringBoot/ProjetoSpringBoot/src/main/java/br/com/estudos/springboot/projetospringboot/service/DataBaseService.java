@@ -5,6 +5,7 @@ import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagamento;
 import br.com.estudos.springboot.projetospringboot.domain.enums.TipoCliente;
 import br.com.estudos.springboot.projetospringboot.ropository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -40,6 +41,9 @@ public class DataBaseService {
 
     @Autowired
     ItemPedidoRepository itemPedidoRepository;
+
+    @Autowired
+    BCryptPasswordEncoder encoder;
 
     public void instantiateTestDataBase(){
         Categoria cat1 = new Categoria(null, "Informatica");
@@ -99,7 +103,7 @@ public class DataBaseService {
         estadoRepository.saveAll(Arrays.asList(est1, est2));
         cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-        Cliente cli1 = new Cliente(null, "Maria Silva", "professor.henrique.trajano@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA);
+        Cliente cli1 = new Cliente(null, "Maria Silva", "professor.henrique.trajano@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA, encoder.encode("testeSenha"));
 
         Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 203", "Jardim", "38220834", cli1, c1);
         Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
