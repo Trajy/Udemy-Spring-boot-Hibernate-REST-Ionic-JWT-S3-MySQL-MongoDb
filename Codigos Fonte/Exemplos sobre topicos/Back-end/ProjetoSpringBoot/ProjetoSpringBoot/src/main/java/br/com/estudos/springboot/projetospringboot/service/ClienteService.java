@@ -83,7 +83,7 @@ public class ClienteService {
         return paginaClientesDto;
     }
 
-    public Cliente toEntidade(ClienteNovoDTO clienteNovoDTO) {
+    public Cliente fromDTO(ClienteNovoDTO clienteNovoDTO) {
         Cliente cliente = new Cliente(null,
             clienteNovoDTO.getNome(),
             clienteNovoDTO.getEmail(),
@@ -110,7 +110,7 @@ public class ClienteService {
         return cliente;
     }
 
-    public Cliente toEntidade(ClienteDTO clienteDto){
+    public Cliente fromDTO(ClienteDTO clienteDto){
         return new Cliente(clienteDto.getId(), clienteDto.getNome(), clienteDto.getEmail(), null, null, null);
     }
 

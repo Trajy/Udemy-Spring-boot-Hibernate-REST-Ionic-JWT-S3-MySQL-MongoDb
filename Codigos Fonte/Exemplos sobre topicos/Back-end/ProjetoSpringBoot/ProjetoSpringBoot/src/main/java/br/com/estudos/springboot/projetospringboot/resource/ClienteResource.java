@@ -6,7 +6,6 @@ import br.com.estudos.springboot.projetospringboot.domain.dto.ClienteNovoDTO;
 import br.com.estudos.springboot.projetospringboot.ropository.EnderecoRepository;
 import br.com.estudos.springboot.projetospringboot.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +37,7 @@ public class ClienteResource {
 
     @RequestMapping(method = RequestMethod.POST, value = "/novo")
     public ResponseEntity<Void> inserir(@Valid @RequestBody ClienteNovoDTO clienteNovoDTO) {
-        Cliente cliente = service.toEntidade(clienteNovoDTO);
+        Cliente cliente = service.fromDTO(clienteNovoDTO);
         cliente = service.inserir(cliente);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().replacePath("clientes/buscar/{id}").build(cliente.getId());
