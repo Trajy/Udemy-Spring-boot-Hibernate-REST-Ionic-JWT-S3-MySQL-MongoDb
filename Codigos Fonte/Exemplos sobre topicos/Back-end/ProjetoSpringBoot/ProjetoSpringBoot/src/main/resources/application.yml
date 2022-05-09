@@ -5,3 +5,7 @@ spring:
 default:
   sender: professor.henrique.trajano@gmail.com
   recipient: professor.henrique.trajano@gmail.com
+
+jwt:
+  secret: SequenciaDeCharsParaAssinarOTokenJWT
+  expiration: 60000 #Tempo dado em mili segundos (neste caso 1 munuto apenas para testes)

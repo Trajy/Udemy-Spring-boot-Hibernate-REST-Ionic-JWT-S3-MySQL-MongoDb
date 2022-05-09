@@ -1,14 +1,18 @@
 package br.com.estudos.springboot.projetospringboot.config;
 
+import br.com.estudos.springboot.projetospringboot.security.JWTAuthenticationFilter;
+import br.com.estudos.springboot.projetospringboot.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -20,6 +24,14 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    JWTUtil jwtUtil;
+
+    // Instancia da classe UserDatailsService utilizada pelo @Bean configure
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    // Instancia que contem dados sobre o ambiente no qual a applicacao esta sendo executada.
     @Autowired
     private Environment env;
 
@@ -67,6 +79,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // para garantir que a politica de acessos sera stateless, ou seja nao ira armazenar a secao do usuario.
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        //recebe o filtro de autenticacao
+        httpSecurity.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+    }
+
+
+    /*
+        E necessario sobrecarregar esse metodo pois o framework precisa saber
+        quem e o UserDatailsService e o Algoritimo de codificacao, neste caso
+        implementado pela classe BCryptPasswordEncoder
+     */
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
     @Bean
@@ -81,4 +107,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+
 }
