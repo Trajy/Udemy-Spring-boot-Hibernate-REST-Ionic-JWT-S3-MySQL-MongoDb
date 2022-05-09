@@ -2,6 +2,7 @@ package br.com.estudos.springboot.projetospringboot.service;
 
 import br.com.estudos.springboot.projetospringboot.domain.*;
 import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagamento;
+import br.com.estudos.springboot.projetospringboot.domain.enums.Perfil;
 import br.com.estudos.springboot.projetospringboot.domain.enums.TipoCliente;
 import br.com.estudos.springboot.projetospringboot.ropository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,18 +105,22 @@ public class DataBaseService {
         cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
         Cliente cli1 = new Cliente(null, "Maria Silva", "professor.henrique.trajano@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA, encoder.encode("testeSenha"));
+        Cliente cli2 = new Cliente(null, "Lucia Souza", "henrique.trajano@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA, encoder.encode("testeSenha"));
+        cli2.addPerfil(Perfil.ADM);
 
         Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 203", "Jardim", "38220834", cli1, c1);
         Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+        Endereco e3 = new Endereco(null, "RuaFarias", "165", null, "Centro", "384473212", cli2, c2);
 
         cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+        cli2.getEnderecos().addAll(Arrays.asList(e3));
 
         String t1 = "27363323";
         String t2 = "93838393";
         cli1.getTelefones().addAll(Arrays.asList(t1, t2));
 
-        clienteRepository.saveAll(Arrays.asList(cli1));
-        enderecoRepository.saveAll(Arrays.asList(e1, e2));
+        clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+        enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
