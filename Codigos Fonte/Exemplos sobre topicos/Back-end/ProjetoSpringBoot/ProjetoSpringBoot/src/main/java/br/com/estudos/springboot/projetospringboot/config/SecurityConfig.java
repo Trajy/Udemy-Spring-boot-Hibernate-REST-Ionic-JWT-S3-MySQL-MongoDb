@@ -1,6 +1,7 @@
 package br.com.estudos.springboot.projetospringboot.config;
 
 import br.com.estudos.springboot.projetospringboot.security.JWTAuthenticationFilter;
+import br.com.estudos.springboot.projetospringboot.security.JWTAuthorizationFilter;
 import br.com.estudos.springboot.projetospringboot.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -82,6 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //recebe o filtro de autenticacao
         httpSecurity.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+        httpSecurity.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
     }
 
 
