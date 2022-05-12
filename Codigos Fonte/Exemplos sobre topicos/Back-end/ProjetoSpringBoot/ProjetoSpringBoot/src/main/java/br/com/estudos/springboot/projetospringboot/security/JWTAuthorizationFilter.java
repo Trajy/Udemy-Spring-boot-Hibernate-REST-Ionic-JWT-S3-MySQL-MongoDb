@@ -38,10 +38,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                 // libera o acesso do usuario ao end-point
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
-
-            // informa que a requisicao pode sequir com a execucao normalmente
-            chain.doFilter(request, response);
         }
+        // informa que a requisicao pode sequir com a execucao normalmente
+        chain.doFilter(request, response);
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(String token) {
