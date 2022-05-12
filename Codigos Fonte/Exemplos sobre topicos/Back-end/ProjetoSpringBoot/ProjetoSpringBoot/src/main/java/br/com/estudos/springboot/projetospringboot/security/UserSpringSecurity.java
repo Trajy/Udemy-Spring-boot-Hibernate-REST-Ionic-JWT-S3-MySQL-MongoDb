@@ -74,4 +74,9 @@ public class UserSpringSecurity implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    // metodo para verificar se o usuario possui determinada Role
+    public boolean hasRole(Perfil perfil) {
+        return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
+    }
 }

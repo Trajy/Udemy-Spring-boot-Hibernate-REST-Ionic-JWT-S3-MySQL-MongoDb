@@ -5,9 +5,12 @@ import br.com.estudos.springboot.projetospringboot.domain.Cliente;
 import br.com.estudos.springboot.projetospringboot.domain.Endereco;
 import br.com.estudos.springboot.projetospringboot.domain.dto.ClienteDTO;
 import br.com.estudos.springboot.projetospringboot.domain.dto.ClienteNovoDTO;
+import br.com.estudos.springboot.projetospringboot.domain.enums.Perfil;
 import br.com.estudos.springboot.projetospringboot.domain.enums.TipoCliente;
 import br.com.estudos.springboot.projetospringboot.ropository.ClienteRepository;
 import br.com.estudos.springboot.projetospringboot.ropository.EnderecoRepository;
+import br.com.estudos.springboot.projetospringboot.security.UserSpringSecurity;
+import br.com.estudos.springboot.projetospringboot.service.exceptions.AuthorizationException;
 import br.com.estudos.springboot.projetospringboot.service.exceptions.DataIntegrityException;
 import br.com.estudos.springboot.projetospringboot.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,13 @@ public class ClienteService {
 
     public Cliente buscar(Integer id){
         Optional<Cliente> cliente = repository.findById(id);
+
+        // recupera o usuario atual logano no sistema
+        UserSpringSecurity usuario = UserService.authenticated();
+
+        if(usuario == null || !usuario.hasRole(Perfil.ADM) && !id.equals(usuario.getId())){
+            throw new AuthorizationException("Acesso negado voce nao e este cliente");
+        }
 
         return cliente.orElseThrow(() -> new ObjectNotFoundException(
                 "objeto com id " + id + " nao encontrado em " + this.getClass().getSimpleName()
