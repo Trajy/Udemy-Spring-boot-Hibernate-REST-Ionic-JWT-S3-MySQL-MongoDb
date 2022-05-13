@@ -1,5 +1,6 @@
 package br.com.estudos.springboot.projetospringboot.service.email;
 
+import br.com.estudos.springboot.projetospringboot.domain.Cliente;
 import br.com.estudos.springboot.projetospringboot.domain.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -71,6 +72,23 @@ public abstract class AbstractEmailService implements EmailService {
         mimeMessageHelper.setText(htmlFromTemplatePedido(pedido), true);
 
         return mimeMessage;
+    }
+
+    @Override
+    public void sendNewPasswordEmail(Cliente cliente, String newPassword) {
+        SimpleMailMessage simpleMailMessage = prepareNewPasswordEmail(cliente, newPassword);
+        sendEmail(simpleMailMessage);
+    }
+
+    protected SimpleMailMessage prepareNewPasswordEmail(Cliente cliente, String newPassword) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(cliente.getEmail());
+        simpleMailMessage.setFrom(sender);
+        simpleMailMessage.setSubject("Solicitacao de nova senha");
+        simpleMailMessage.setSentDate(new Date());
+        simpleMailMessage.setText("Nova senha: " + newPassword);
+
+        return simpleMailMessage;
     }
 
 
