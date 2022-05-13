@@ -1,16 +1,23 @@
 package br.com.estudos.springboot.projetospringboot.service;
 
+import br.com.estudos.springboot.projetospringboot.domain.Cliente;
 import br.com.estudos.springboot.projetospringboot.domain.ItemPedido;
 import br.com.estudos.springboot.projetospringboot.domain.PagamentoComBoleto;
 import br.com.estudos.springboot.projetospringboot.domain.Pedido;
+import br.com.estudos.springboot.projetospringboot.domain.dto.CategoriaDTO;
 import br.com.estudos.springboot.projetospringboot.domain.enums.EstadoPagamento;
 import br.com.estudos.springboot.projetospringboot.ropository.ItemPedidoRepository;
 import br.com.estudos.springboot.projetospringboot.ropository.PagamentoRepository;
 import br.com.estudos.springboot.projetospringboot.ropository.PedidoRepository;
+import br.com.estudos.springboot.projetospringboot.security.UserSpringSecurity;
 import br.com.estudos.springboot.projetospringboot.service.email.EmailService;
+import br.com.estudos.springboot.projetospringboot.service.exceptions.AuthorizationException;
 import br.com.estudos.springboot.projetospringboot.service.exceptions.ObjectNotFoundException;
 import br.com.estudos.springboot.projetospringboot.service.utils.BoletoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -74,4 +81,19 @@ public class PedidoService {
         emailService.sendOrderConfirmationHtmlEmail(obj);
         return obj;
     }
+
+    public Page<Pedido> buscarPaginado(Integer numeroPagina, Integer linhasPorPagina, String ordenarPor, String direcaoOrdencao) {
+
+        UserSpringSecurity usuario = UserService.authenticated();
+
+        if(usuario == null){
+            throw new AuthorizationException("Acesso negado");
+        }
+        PageRequest requisicaoPagina = PageRequest.of(numeroPagina, linhasPorPagina, Sort.Direction.valueOf(direcaoOrdencao), ordenarPor);
+
+        Cliente cliente = clienteService.buscar(usuario.getId());
+
+        return repository.findByCliente(cliente, requisicaoPagina);
+    }
+
 }
