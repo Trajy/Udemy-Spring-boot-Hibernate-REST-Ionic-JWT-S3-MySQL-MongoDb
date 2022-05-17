@@ -21,3 +21,4 @@ s3:
 cliente_profile:
   picture:
     prefix: cp
+    size: 200
