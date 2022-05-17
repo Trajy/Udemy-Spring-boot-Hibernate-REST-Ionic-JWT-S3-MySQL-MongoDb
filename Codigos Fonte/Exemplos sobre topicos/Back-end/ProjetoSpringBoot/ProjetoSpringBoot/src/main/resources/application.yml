@@ -17,3 +17,7 @@ aws:
 s3:
   bucket: spring-ionic-trajy
   region: sa-east-1
+
+cliente_profile:
+  picture:
+    prefix: cp

@@ -14,6 +14,7 @@ import br.com.estudos.springboot.projetospringboot.service.exceptions.Authorizat
 import br.com.estudos.springboot.projetospringboot.service.exceptions.DataIntegrityException;
 import br.com.estudos.springboot.projetospringboot.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.awt.image.BufferedImage;
 import java.lang.reflect.Field;
 import java.net.URI;
 import java.util.List;
@@ -43,6 +45,12 @@ public class ClienteService {
 
     @Autowired
     private S3Service s3Service;
+
+    @Autowired
+    private ImageService imgService;
+
+    @Value("${cliente_profile.picture.prefix}")
+    private String picturePrefix;
 
     public Cliente buscar(Integer id){
         Optional<Cliente> cliente = repository.findById(id);
@@ -154,11 +162,10 @@ public class ClienteService {
 
         if(usuario == null) throw new AuthorizationException("Acesso negado");
 
-        URI uri = s3Service.uploadFile(multipartFile);
-        Cliente cliente = buscar(usuario.getId());
-        cliente.setImageUrl(uri.toString());
-        alterar(cliente);
+        BufferedImage jpgImage = imgService.getJpgImageFromFile(multipartFile);
+        String fileName = picturePrefix + usuario.getId() + ".jpg";
 
-        return uri;
+        return s3Service.uploadFile(imgService.getInputStream(jpgImage, "jpg"), fileName, "image");
+
     }
 }
