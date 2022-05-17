@@ -41,7 +41,7 @@ public class ResourceExceptionHandler {
     }
 
     @ExceptionHandler(AuthorizationException.class)
-    public ResponseEntity<StandardError> validationUser(FileException e, HttpServletRequest request){
+    public ResponseEntity<StandardError> validationUser(AuthorizationException e, HttpServletRequest request){
         StandardError erro = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(erro);
     }
